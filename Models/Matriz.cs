@@ -11,4 +11,8 @@ public class Matriz
     [Required]
 
     public int Versao { get; set; }
+
+    //propriedade de Navegação M-n
+
+    public List<Disciplina> Disciplinas { get; set; }
 }

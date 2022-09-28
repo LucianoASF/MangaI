@@ -21,5 +21,9 @@ public class Disciplina
 
     public List<Matricula> Matriculas { get; set; }
 
+    //propriedade de Navegação M-n
+
+    public List<Matriz> Matrizes { get; set; }
+
 
 }
