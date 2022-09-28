@@ -15,6 +15,8 @@ public class NotaAluno
 
     //Chaves Estrangeiras
 
+    public int AvaliacaoId { get; set; }
+
     public int DisciplinaId { get; set; }
 
     public int UsuarioId { get; set; }
