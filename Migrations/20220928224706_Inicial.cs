@@ -102,7 +102,7 @@ namespace MangaI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Turma",
+                name: "Turmas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -112,9 +112,9 @@ namespace MangaI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Turma", x => x.Id);
+                    table.PrimaryKey("PK_Turmas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Turma_Disciplinas_DisciplinaId",
+                        name: "FK_Turmas_Disciplinas_DisciplinaId",
                         column: x => x.DisciplinaId,
                         principalTable: "Disciplinas",
                         principalColumn: "Id",
@@ -207,9 +207,9 @@ namespace MangaI.Migrations
                 {
                     table.PrimaryKey("PK_Avaliacoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Avaliacoes_Turma_TurmaId",
+                        name: "FK_Avaliacoes_Turmas_TurmaId",
                         column: x => x.TurmaId,
-                        principalTable: "Turma",
+                        principalTable: "Turmas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -229,9 +229,9 @@ namespace MangaI.Migrations
                 {
                     table.PrimaryKey("PK_Matriculas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Matriculas_Turma_TurmaId",
+                        name: "FK_Matriculas_Turmas_TurmaId",
                         column: x => x.TurmaId,
-                        principalTable: "Turma",
+                        principalTable: "Turmas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -363,8 +363,8 @@ namespace MangaI.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turma_DisciplinaId",
-                table: "Turma",
+                name: "IX_Turmas_DisciplinaId",
+                table: "Turmas",
                 column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
@@ -405,7 +405,7 @@ namespace MangaI.Migrations
                 name: "Matriculas");
 
             migrationBuilder.DropTable(
-                name: "Turma");
+                name: "Turmas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

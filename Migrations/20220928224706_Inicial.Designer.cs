@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaI.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    [Migration("20220928224404_Inicial")]
+    [Migration("20220928224706_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,7 +262,7 @@ namespace MangaI.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("Turma");
+                    b.ToTable("Turmas");
                 });
 
             modelBuilder.Entity("MangaI.Models.Usuario", b =>

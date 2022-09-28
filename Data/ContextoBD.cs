@@ -20,6 +20,7 @@ public class ContextoBD : DbContext
     public DbSet<Perfil> Perfis { get; set; }
     public DbSet<Telefone> Telefones { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Turma> Turmas { get; set; }
 
 
 

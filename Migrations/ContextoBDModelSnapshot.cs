@@ -260,7 +260,7 @@ namespace MangaI.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("Turma");
+                    b.ToTable("Turmas");
                 });
 
             modelBuilder.Entity("MangaI.Models.Usuario", b =>
