@@ -18,8 +18,6 @@ public class Curso
     public Matriz Matriz { get; set; }
 
 
-    //Propriedade Chave Estrangeira
-    public int CursoId { get; set; }
 
 
 
