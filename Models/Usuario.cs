@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Usuario
 {
-    
+
     [Required]
     public int Id { get; set; }
 
@@ -30,4 +30,8 @@ public class Usuario
     [Required]
     [Column(TypeName = "varchar(25)")]
     public string Sexo { get; set; }
+
+    //Propriedade de Navegação
+
+    public List<Telefone> Telefones { get; set; }
 }
