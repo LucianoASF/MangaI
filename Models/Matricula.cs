@@ -8,6 +8,6 @@ public class Matricula
     [Required]
     [Column(TypeName = "Decimal(13,2)")]
 
-    
-    public Decimal NotaObtida { get; set; }
+
+    public Decimal NotaFinal { get; set; }
 }
