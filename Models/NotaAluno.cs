@@ -5,7 +5,7 @@ namespace Mangal.Models;
 
 public class NotaAluno
 {
-    [Required]
+
     [Column(TypeName = "decimal(13,2)")]
     public decimal NotaObtida { get; set; }
 }

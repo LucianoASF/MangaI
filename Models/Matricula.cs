@@ -5,17 +5,17 @@ namespace MangaI.Models;
 
 public class Matricula
 {
-    [Required]
+
     [Column(TypeName = "Decimal(13,2)")]
 
 
     public Decimal NotaFinal { get; set; }
 
-      //Propriedade de Navegação
+    //Propriedade de Navegação
 
     public Usuario Usuario { get; set; }
 
     //Chave Estrangeira
 
-  public int UsuarioId { get; set; }
+    public int UsuarioId { get; set; }
 }
