@@ -21,4 +21,10 @@ public class Matricula
 
     //Propriedade de Navegação
     public List<NotaAluno> NotasAlunos { get; set; }
+
+    //Propriedade de Navegação
+
+    public List<Frequencia> Frequencias { get; set; }
+
+
 }

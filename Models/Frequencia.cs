@@ -18,4 +18,13 @@ public class Frequencia
     [Column(TypeName = "text")]
 
     public string Conteudo { get; set; }
+
+    //Propriedade de Navegação
+
+    public Matricula Matricula { get; set; }
+
+    //Chave Estrangeira
+
+    public int DisciplinaId { get; set; }
+    public int UsuarioId { get; set; }
 }
