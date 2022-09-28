@@ -19,7 +19,7 @@ namespace MangaI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NomeCurso = table.Column<string>(type: "varchar(35)", nullable: false)
+                    Nome = table.Column<string>(type: "varchar(35)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -201,6 +201,7 @@ namespace MangaI.Migrations
                     Nome = table.Column<string>(type: "varchar(45)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Valor = table.Column<decimal>(type: "Decimal(13,2)", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     TurmaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -266,26 +267,24 @@ namespace MangaI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Frequencias",
+                name: "Conteudos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Presente = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Dia = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Conteudo = table.Column<string>(type: "text", nullable: false)
+                    tema = table.Column<string>(type: "text", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MatriculaId = table.Column<int>(type: "int", nullable: false)
+                    Dia = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    MatriculaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Frequencias", x => x.Id);
+                    table.PrimaryKey("PK_Conteudos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Frequencias_Matriculas_MatriculaId",
+                        name: "FK_Conteudos_Matriculas_MatriculaId",
                         column: x => x.MatriculaId,
                         principalTable: "Matriculas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -317,10 +316,36 @@ namespace MangaI.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Frequencias",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Presente = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ConteudoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Frequencias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Frequencias_Conteudos_ConteudoId",
+                        column: x => x.ConteudoId,
+                        principalTable: "Conteudos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Avaliacoes_TurmaId",
                 table: "Avaliacoes",
                 column: "TurmaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Conteudos_MatriculaId",
+                table: "Conteudos",
+                column: "MatriculaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DisciplinaMatriz_MatrizesId",
@@ -328,9 +353,9 @@ namespace MangaI.Migrations
                 column: "MatrizesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Frequencias_MatriculaId",
+                name: "IX_Frequencias_ConteudoId",
                 table: "Frequencias",
-                column: "MatriculaId");
+                column: "ConteudoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matriculas_TurmaId",
@@ -397,6 +422,9 @@ namespace MangaI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Telefones");
+
+            migrationBuilder.DropTable(
+                name: "Conteudos");
 
             migrationBuilder.DropTable(
                 name: "Avaliacoes");

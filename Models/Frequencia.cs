@@ -11,19 +11,13 @@ public class Frequencia
     [Required]
     public bool Presente { get; set; }
 
-    [Required]
-    public DateTime Dia { get; set; }
 
-    [Required]
-    [Column(TypeName = "text")]
 
-    public string Conteudo { get; set; }
+    //Propriedade de Navegação Frequencia N : 1 Conteudo
 
-    //Propriedade de Navegação Frequencia N : 1 Matricula
+    public Conteudo Conteudo { get; set; }
 
-    public Matricula Matricula { get; set; }
+    //Chave Estrangeira Frequencia N : 1 Conteudo
 
-    //Chave Estrangeira Frequencia N : 1 Matricula
-
-    public int MatriculaId { get; set; }
+    public int ConteudoId { get; set; }
 }

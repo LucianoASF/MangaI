@@ -40,6 +40,9 @@ namespace MangaI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(45)");
@@ -57,13 +60,36 @@ namespace MangaI.Migrations
                     b.ToTable("Avaliacoes");
                 });
 
+            modelBuilder.Entity("MangaI.Models.Conteudo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Dia")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("MatriculaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("tema")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatriculaId");
+
+                    b.ToTable("Conteudos");
+                });
+
             modelBuilder.Entity("MangaI.Models.Curso", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("NomeCurso")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(35)");
 
@@ -123,14 +149,7 @@ namespace MangaI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Conteudo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Dia")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("MatriculaId")
+                    b.Property<int>("ConteudoId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Presente")
@@ -138,7 +157,7 @@ namespace MangaI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MatriculaId");
+                    b.HasIndex("ConteudoId");
 
                     b.ToTable("Frequencias");
                 });
@@ -339,15 +358,22 @@ namespace MangaI.Migrations
                     b.Navigation("Turma");
                 });
 
+            modelBuilder.Entity("MangaI.Models.Conteudo", b =>
+                {
+                    b.HasOne("MangaI.Models.Matricula", null)
+                        .WithMany("Conteudos")
+                        .HasForeignKey("MatriculaId");
+                });
+
             modelBuilder.Entity("MangaI.Models.Frequencia", b =>
                 {
-                    b.HasOne("MangaI.Models.Matricula", "Matricula")
+                    b.HasOne("MangaI.Models.Conteudo", "Conteudo")
                         .WithMany("Frequencias")
-                        .HasForeignKey("MatriculaId")
+                        .HasForeignKey("ConteudoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Matricula");
+                    b.Navigation("Conteudo");
                 });
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
@@ -453,6 +479,11 @@ namespace MangaI.Migrations
                     b.Navigation("NotaAlunos");
                 });
 
+            modelBuilder.Entity("MangaI.Models.Conteudo", b =>
+                {
+                    b.Navigation("Frequencias");
+                });
+
             modelBuilder.Entity("MangaI.Models.Curso", b =>
                 {
                     b.Navigation("Matrizes");
@@ -470,7 +501,7 @@ namespace MangaI.Migrations
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
                 {
-                    b.Navigation("Frequencias");
+                    b.Navigation("Conteudos");
 
                     b.Navigation("NotasAlunos");
                 });

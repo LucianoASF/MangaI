@@ -16,6 +16,9 @@ public class Avaliacao
     [Column(TypeName = "Decimal(13,2)")]
     public Decimal Valor { get; set; }
 
+    [Required]
+    public DateTime Data { get; set; }
+
 
     //Propriedade de Navegação Avaliação 1 : N NotaAluno
     public List<NotaAluno> NotaAlunos { get; set; }

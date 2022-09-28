@@ -10,7 +10,7 @@ public class Curso
 
     [Required]
     [Column(TypeName = "varchar(35)")]
-    public string NomeCurso { get; set; }
+    public string Nome { get; set; }
 
 
 
