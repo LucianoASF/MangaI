@@ -16,11 +16,18 @@ public class Avaliacao
     [Column(TypeName = "Decimal(13,2)")]
     public Decimal Valor { get; set; }
 
-       
-    //Propriedade de Navegação
+
+    //Propriedade de Navegação Avaliação 1 : N NotaAluno
     public List<NotaAluno> NotaAlunos { get; set; }
 
-    //Chave Estrangeira
-    public int AvaliacaoId { get; set; }
+
+
+    //Propriedade de Navegação Avaliação N : 1 Turma
+
+    public Turma Turma { get; set; }
+
+    //chave estrangeira Avaliação N : 1 Turma
+
+    public int TurmaId { get; set; }
 
 }

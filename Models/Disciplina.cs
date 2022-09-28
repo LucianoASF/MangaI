@@ -17,9 +17,9 @@ public class Disciplina
 
     public int CargaHoraria { get; set; }
 
-    //Propriedade de Navegação
+    //propriedade de Navegação Disciplina 1 : N Turma
 
-    public List<Matricula> Matriculas { get; set; }
+    public List<Turma> Turmas { get; set; }
 
     //propriedade de Navegação M-n
 

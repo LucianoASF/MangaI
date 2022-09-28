@@ -19,12 +19,11 @@ public class Frequencia
 
     public string Conteudo { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Frequencia N : 1 Matricula
 
     public Matricula Matricula { get; set; }
 
-    //Chave Estrangeira
+    //Chave Estrangeira Frequencia N : 1 Matricula
 
-    public int DisciplinaId { get; set; }
-    public int UsuarioId { get; set; }
+    public int MatriculaId { get; set; }
 }

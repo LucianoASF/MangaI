@@ -11,11 +11,11 @@ public class Telefone
     [Column(TypeName = "varchar(45)")]
     public string Numero { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Telefone N : 1 Usuario
 
     public Usuario Usuario { get; set; }
 
-    // Chave Estrangeira
+    // Chave Estrangeira Telefone N : 1 Usuario
 
     public int UsuarioId { get; set; }
 }

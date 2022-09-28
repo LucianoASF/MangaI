@@ -6,14 +6,14 @@ namespace MangaI.Models;
 public class Perfil
 {
     [Required]
-    public int Id {get; set;}
+    public int Id { get; set; }
 
     [Required]
     [Column(TypeName = "varchar(45)")]
-    public string Nome {get; set;}
+    public string Nome { get; set; }
 
-    
-    //Propriedade de navegação
+
+    //Propriedade de navegação Perfil 1 : N Usuario
     public List<Usuario> Usuarios { get; set; }
 
 }

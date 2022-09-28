@@ -31,26 +31,26 @@ public class Usuario
     [Column(TypeName = "varchar(25)")]
     public string Sexo { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Usuario 1 : N Telefone
 
     public List<Telefone> Telefones { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Usuario N : 1 Perfil
 
     public Perfil Perfil { get; set; }
 
-    //Chave Estrangeira
+    //Chave Estrangeira Usuario N : 1 Perfil
 
-    public int TelefoneId { get; set; }
+    public int PerfilId { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Usuario N : 1 Endereco
     public Endereco Endereco { get; set; }
 
-    //Chave Estrangeira
+    //Chave Estrangeira Usuario N : 1 Endereco
 
     public int EnderecoId { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Usuario 1 : N Matricula
     public List<Matricula> Matriculas { get; set; }
 
 

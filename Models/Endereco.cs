@@ -25,7 +25,7 @@ public class Endereco
     [Column(TypeName = "varchar(45)")]
     public string Cidade { get; set; }
 
-    //Propriedade de Navegação
+    //Propriedade de Navegação Endereco 1 : N Usuario
 
     public List<Usuario> Usuarios { get; set; }
 

@@ -14,8 +14,8 @@ public class Curso
 
 
 
-    //Propriedade de navegação
-    public Matriz Matriz { get; set; }
+    //Propriedade de navegação Curso 1 : N Matriz
+    public List<Matriz> Matrizes { get; set; }
 
 
 

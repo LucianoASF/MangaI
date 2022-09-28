@@ -15,4 +15,12 @@ public class Matriz
     //propriedade de Navegação M-n
 
     public List<Disciplina> Disciplinas { get; set; }
+
+    //propriedade de Navegação Matriz N : 1 Curso
+
+    public Curso Curso { get; set; }
+
+    //chave estrangeira Matriz N : 1 Curso
+
+    public int CursoId { get; set; }
 }
