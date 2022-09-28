@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaI.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    [Migration("20220928025643_Inicial")]
+    [Migration("20220928224404_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,6 +285,9 @@ namespace MangaI.Migrations
                     b.Property<int>("EnderecoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MatrizId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(45)");
@@ -302,7 +305,10 @@ namespace MangaI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnderecoId");
+                    b.HasIndex("EnderecoId")
+                        .IsUnique();
+
+                    b.HasIndex("MatrizId");
 
                     b.HasIndex("PerfilId");
 
@@ -420,8 +426,14 @@ namespace MangaI.Migrations
             modelBuilder.Entity("MangaI.Models.Usuario", b =>
                 {
                     b.HasOne("MangaI.Models.Endereco", "Endereco")
+                        .WithOne("Usuario")
+                        .HasForeignKey("MangaI.Models.Usuario", "EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MangaI.Models.Matriz", "Matriz")
                         .WithMany("Usuarios")
-                        .HasForeignKey("EnderecoId")
+                        .HasForeignKey("MatrizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -432,6 +444,8 @@ namespace MangaI.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
+
+                    b.Navigation("Matriz");
 
                     b.Navigation("Perfil");
                 });
@@ -453,7 +467,7 @@ namespace MangaI.Migrations
 
             modelBuilder.Entity("MangaI.Models.Endereco", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
@@ -461,6 +475,11 @@ namespace MangaI.Migrations
                     b.Navigation("Frequencias");
 
                     b.Navigation("NotasAlunos");
+                });
+
+            modelBuilder.Entity("MangaI.Models.Matriz", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("MangaI.Models.Perfil", b =>

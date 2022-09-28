@@ -54,4 +54,14 @@ public class Usuario
     public List<Matricula> Matriculas { get; set; }
 
 
+     //propriedade de Navegação Usuario N : 1 Matriz
+
+    public Matriz Matriz { get; set; }
+
+
+    //chave estrangeira Usuario N : 1 Matriz 
+
+    public int MatrizId { get; set; }
+
+
 }

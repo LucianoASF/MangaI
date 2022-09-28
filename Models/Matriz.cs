@@ -23,4 +23,11 @@ public class Matriz
     //chave estrangeira Matriz N : 1 Curso
 
     public int CursoId { get; set; }
+
+
+    //propriedade de Navegação Matriz 1 : N Usuario
+    public List<Usuario> Usuarios { get; set; }
+
+
+
 }

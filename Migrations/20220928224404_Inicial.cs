@@ -123,44 +123,6 @@ namespace MangaI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "varchar(45)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(45)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CPF = table.Column<string>(type: "varchar(25)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RG = table.Column<string>(type: "varchar(45)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DataNascimento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Sexo = table.Column<string>(type: "varchar(25)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PerfilId = table.Column<int>(type: "int", nullable: false),
-                    EnderecoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Enderecos_EnderecoId",
-                        column: x => x.EnderecoId,
-                        principalTable: "Enderecos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Perfis_PerfilId",
-                        column: x => x.PerfilId,
-                        principalTable: "Perfis",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "DisciplinaMatriz",
                 columns: table => new
                 {
@@ -180,6 +142,51 @@ namespace MangaI.Migrations
                         name: "FK_DisciplinaMatriz_Matrizes_MatrizesId",
                         column: x => x.MatrizesId,
                         principalTable: "Matrizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(type: "varchar(45)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(45)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CPF = table.Column<string>(type: "varchar(25)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RG = table.Column<string>(type: "varchar(45)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataNascimento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Sexo = table.Column<string>(type: "varchar(25)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PerfilId = table.Column<int>(type: "int", nullable: false),
+                    EnderecoId = table.Column<int>(type: "int", nullable: false),
+                    MatrizId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Enderecos_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Enderecos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Matrizes_MatrizId",
+                        column: x => x.MatrizId,
+                        principalTable: "Matrizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Perfis_PerfilId",
+                        column: x => x.PerfilId,
+                        principalTable: "Perfis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -363,7 +370,13 @@ namespace MangaI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_EnderecoId",
                 table: "Usuarios",
-                column: "EnderecoId");
+                column: "EnderecoId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_MatrizId",
+                table: "Usuarios",
+                column: "MatrizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_PerfilId",
@@ -386,16 +399,10 @@ namespace MangaI.Migrations
                 name: "Telefones");
 
             migrationBuilder.DropTable(
-                name: "Matrizes");
-
-            migrationBuilder.DropTable(
                 name: "Avaliacoes");
 
             migrationBuilder.DropTable(
                 name: "Matriculas");
-
-            migrationBuilder.DropTable(
-                name: "Cursos");
 
             migrationBuilder.DropTable(
                 name: "Turma");
@@ -410,7 +417,13 @@ namespace MangaI.Migrations
                 name: "Enderecos");
 
             migrationBuilder.DropTable(
+                name: "Matrizes");
+
+            migrationBuilder.DropTable(
                 name: "Perfis");
+
+            migrationBuilder.DropTable(
+                name: "Cursos");
         }
     }
 }
