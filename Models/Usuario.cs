@@ -49,4 +49,9 @@ public class Usuario
     //Chave Estrangeira
 
     public int EnderecoId { get; set; }
+
+    //Propriedade de Navegação
+    public List<Matricula> Matriculas { get; set; }
+
+
 }

@@ -10,4 +10,12 @@ public class Matricula
 
 
     public Decimal NotaFinal { get; set; }
+
+      //Propriedade de Navegação
+
+    public Usuario Usuario { get; set; }
+
+    //Chave Estrangeira
+
+  public int UsuarioId { get; set; }
 }
