@@ -20,4 +20,7 @@ public class Avaliacao
     //Propriedade de Navegação
     public List<NotaAluno> NotaAlunos { get; set; }
 
+    //Chave Estrangeira
+    public int AvaliacaoId { get; set; }
+
 }
