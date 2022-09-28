@@ -35,7 +35,18 @@ public class Usuario
 
     public List<Telefone> Telefones { get; set; }
 
-      //Propriedade de Navegação
+    //Propriedade de Navegação
 
     public Perfil Perfil { get; set; }
+
+    //Chave Estrangeira
+
+    public int TelefoneId { get; set; }
+
+    //Propriedade de Navegação
+    public Endereco Endereco { get; set; }
+
+    //Chave Estrangeira
+
+    public int EnderecoId { get; set; }
 }
