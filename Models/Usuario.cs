@@ -34,4 +34,8 @@ public class Usuario
     //Propriedade de Navegação
 
     public List<Telefone> Telefones { get; set; }
+
+      //Propriedade de Navegação
+
+    public Perfil Perfil { get; set; }
 }

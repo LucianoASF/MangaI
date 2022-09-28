@@ -11,4 +11,9 @@ public class Perfil
     [Required]
     [Column(TypeName = "varchar(45)")]
     public string Nome {get; set;}
+
+    
+    //Propriedade de navegação
+    public List<Usuario> Usuarios { get; set; }
+
 }
