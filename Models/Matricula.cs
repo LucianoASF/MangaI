@@ -18,4 +18,7 @@ public class Matricula
     //Chave Estrangeira
 
     public int UsuarioId { get; set; }
+
+    //Propriedade de Navegação
+    public List<NotaAluno> NotasAlunos { get; set; }
 }
