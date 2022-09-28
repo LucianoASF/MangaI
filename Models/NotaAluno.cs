@@ -11,5 +11,11 @@ public class NotaAluno
 
     //Propriedade de Navegação
 
-    public Disciplina Disciplina { get; set; }
+    public Matricula Matricula { get; set; }
+
+    //Chaves Estrangeiras
+
+    public int AvaliacaoId { get; set; }
+
+    public int UsuarioId { get; set; }
 }
