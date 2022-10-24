@@ -28,7 +28,7 @@ public class DisciplinaServico
         disciplina.DataCriacao = agora;
         disciplina.DataAtualizacao = agora;
 
-        //Enviar o procedimento para o Repositorio salvar no BD
+        //Enviar a disciplina para o Repositorio salvar no BD
         disciplina = _disciplinaRepositorio.CriarDisciplina(disciplina);
 
 
@@ -40,10 +40,56 @@ public class DisciplinaServico
 
     }
 
-    
+    public List<DisciplinaResposta> ListarDisciplina()
+    {
+        //Pedir a lista de Disciplina do repositorio
+        var disciplinas = _disciplinaRepositorio.ListarDisciplinas();
+
+        //Criar a lista de respostas
+        List<DisciplinaResposta> disciplinaRespostas = new();
+
+        //Copiar os dados do Modelo (Disciplina) para a Resposta (DisciplinaResposta)
+        foreach (var disicplina in disciplinas)
+        {
+            //Copiar de Modelo para Resposta
+            var disciplinaResposta = ConverterModeloParaResposta(disciplina);
+
+            //Adicionar a reposta na lista
+            disciplinaRespostas.Add(disciplinaResposta);
+        }
+
+        //Retornar a lista de respostas
+        return disciplinaRespostas;
+    }
+
+    private DisciplinaResposta ConverterModeloParaResposta(Disciplina modelo)
+    {
+        var disciplinaResposta = new DisciplinaResposta();
+        disciplinaResposta.Id = modelo.Id;
+        disciplinaResposta.Nome = modelo.Nome;
+        disciplinaResposta.CargaHoraria = modelo.CargaHoraria;
+
+        return disciplinaResposta;
+    }
+
+    public  DisciplinaResposta BuscarDisciplinaPeloId(int id)
+    {
+        //Pedir a  disciplina do Repositorio
+        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
+
+        if (disciplina is null)
+        {
+            return null; //no futuro vai ser uma excecao
+        }
+
+        //Copiar do Modelo (Disciplina) para Resposta (DisciplinaResposta)
+        return ConverterModeloParaResposta(disciplina);
+
+    }
+
     public void RemoverDisciplina(int id)
     {
-        //Busar o procedimento (modelo) pelo id
+        //Busar a disciplina (modelo) pelo id
         var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
 
         if (disciplina is null)
@@ -54,6 +100,37 @@ public class DisciplinaServico
         //Mandar o repositorio remover o modelo
         _disciplinaRepositorio.RemoverDisciplina(disciplina);
     }
+    
+    
+  public DisciplinaResposta AtualizarDisciplina
+    (int id, DisciplinaCriarAtualizarRequisicao disciplinaEditado)
+  {
+    //Buscar o modelo no repositorio
+    var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
 
+    if (disciplina is null)
+    {
+      return null; //no futuro vai ser uma exceção
+    }
+
+    //Copiar da Requisição para o Modelo
+    ConverterRequisicaoParaModelo(disciplinaEditado, disciplina);
+
+    //Mandar o repositorio salvar
+    _disciplinaRepositorio.AtualizarDisciplina();
+
+    //Copiar do Modelo para Resposta
+    return ConverterModeloParaResposta(disciplina);
+  }
+
+  private void ConverterRequisicaoParaModelo
+    (DisciplinaCriarAtualizarRequisicao requisicao, Disciplina modelo)
+  {
+    modelo.Nome = requisicao.Nome;
+    modelo.CargaHoraria = requisicao.CargaHoraria;
+  }
 
 }
+
+
+
