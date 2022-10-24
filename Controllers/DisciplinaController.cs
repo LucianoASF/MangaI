@@ -38,4 +38,16 @@ public class DisciplinaController : ControllerBase
         var disciplina = _disciplinaServico.BuscarDisciplinaPeloId(id);
         return disciplina;
     }
+    [HttpPut("{id:int}")]
+    public DisciplinaResposta PutDisciplina([FromRoute] int id, [FromBody] DisciplinaCriarAtualizarRequisicao disciplinaEditada)
+    {
+        var disciplinaResposta = _disciplinaServico.AtualizarDisciplina(id, disciplinaEditada);
+        return disciplinaResposta;
+    }
+    [HttpDelete("{id:int}")]
+
+    public void DeleteDisciplina(int id)
+    {
+        _disciplinaServico.RemoverDisciplina(id);
+    }
 }
