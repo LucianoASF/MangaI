@@ -14,19 +14,42 @@ public class DisciplinaServico
         _disciplinaRepositorio = repositorio;
     }
 
-    public void RemoverDisciplina(int id)
-  {
-    //Busar o procedimento (modelo) pelo id
-    var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
-
-    if (disciplina is null)
+    public DisciplinaResposta CriarProcedimento
+       (DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
-      return; //no futuro vai ser uma exceção
-    }
+        //Copiar os dados da Requisicao para o Modelo
+        var disciplina = new Disciplina();
+        ConverterRequisicaoParaModelo(novoProcedimento, procedimento);
 
-    //Mandar o repositorio remover o modelo
-    _disciplinaRepositorio.RemoverDisciplina(disciplina);
-  }
+        //Regra de negócio
+        var agora = DateTime.Now;
+        procedimento.DataCriacao = agora;
+        procedimento.DataAtualizacao = agora;
+
+        //Enviar o procedimento para o Repositorio salvar no BD
+        procedimento = _procedimentoRepositorio.CriarProcedimento(procedimento);
+
+
+        //Copiar do Modelo para a Resposta
+        var procedimentoResposta = ConverterModeloParaResposta(procedimento);
+
+        //retornar a resposta
+        return procedimentoResposta;
+
+    }
+    public void RemoverDisciplina(int id)
+    {
+        //Busar o procedimento (modelo) pelo id
+        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
+
+        if (disciplina is null)
+        {
+            return; //no futuro vai ser uma exceção
+        }
+
+        //Mandar o repositorio remover o modelo
+        _disciplinaRepositorio.RemoverDisciplina(disciplina);
+    }
 
 
 }
