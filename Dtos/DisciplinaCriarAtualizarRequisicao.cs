@@ -2,7 +2,7 @@ namespace MangaI.Dtos;
 
 public class DisciplinaCriarAtualizarRequisicao
 {
- public string Nome { get; set; }
+    public string Nome { get; set; }
 
- public int CargaHoraria { get; set; }
+    public int CargaHoraria { get; set; }
 }
