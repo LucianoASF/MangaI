@@ -49,7 +49,7 @@ public class DisciplinaServico
         List<DisciplinaResposta> disciplinaRespostas = new();
 
         //Copiar os dados do Modelo (Disciplina) para a Resposta (DisciplinaResposta)
-        foreach (var disicplina in disciplinas)
+        foreach (var disciplina in disciplinas)
         {
             //Copiar de Modelo para Resposta
             var disciplinaResposta = ConverterModeloParaResposta(disciplina);
