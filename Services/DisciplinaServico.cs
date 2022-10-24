@@ -1,3 +1,5 @@
+using MangaI.Dtos;
+using MangaI.Models;
 using MangaI.Repositorios;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,29 +16,31 @@ public class DisciplinaServico
         _disciplinaRepositorio = repositorio;
     }
 
-    public DisciplinaResposta CriarProcedimento
+    public DisciplinaResposta CriarDisciplina
        (DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
         //Copiar os dados da Requisicao para o Modelo
         var disciplina = new Disciplina();
-        ConverterRequisicaoParaModelo(novoProcedimento, procedimento);
+        ConverterRequisicaoParaModelo(novaDisciplina, disciplina);
 
         //Regra de negócio
         var agora = DateTime.Now;
-        procedimento.DataCriacao = agora;
-        procedimento.DataAtualizacao = agora;
+        disciplina.DataCriacao = agora;
+        disciplina.DataAtualizacao = agora;
 
         //Enviar o procedimento para o Repositorio salvar no BD
-        procedimento = _procedimentoRepositorio.CriarProcedimento(procedimento);
+        disciplina = _disciplinaRepositorio.CriarDisciplina(disciplina);
 
 
         //Copiar do Modelo para a Resposta
-        var procedimentoResposta = ConverterModeloParaResposta(procedimento);
+        var disciplinaResposta = ConverterModeloParaResposta(disciplina);
 
         //retornar a resposta
-        return procedimentoResposta;
+        return disciplinaResposta;
 
     }
+
+    
     public void RemoverDisciplina(int id)
     {
         //Busar o procedimento (modelo) pelo id

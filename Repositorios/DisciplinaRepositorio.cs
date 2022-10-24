@@ -45,10 +45,10 @@ public class DisciplinaRepositorio
 
     }
 
-     public void AtualizarDisciplina()
-  {
-    _contexto.SaveChanges();
-  }
+    public void AtualizarDisciplina()
+    {
+        _contexto.SaveChanges();
+    }
 
 
 }
