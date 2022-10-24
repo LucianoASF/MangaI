@@ -28,7 +28,7 @@ public class DisciplinaController : ControllerBase
 
     public List<DisciplinaResposta> GetDisciplinas()
     {
-        var disciplinas = _disciplinaServico.ListarServicos();
+        var disciplinas = _disciplinaServico.ListarDisciplinas();
 
         return disciplinas;
     }
