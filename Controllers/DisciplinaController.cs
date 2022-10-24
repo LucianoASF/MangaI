@@ -1,5 +1,6 @@
 using MangaI.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using MangaI.Services;
 
 namespace MangaI.Controllers;
 
@@ -7,10 +8,17 @@ namespace MangaI.Controllers;
 [Route("disciplinas")]
 public class DisciplinaController : ControllerBase
 {
-[HttpPost]
+    //Injetado no construtor
+    private DisciplinaServico _disciplinaServico;
 
-public void PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
-{
- //
-}
+    //Construtor com Injecao de Dependencia
+    public DisciplinaController([FromServices] DisciplinaServico servico)
+    {
+        _disciplinaServico = servico;
+    }
+    [HttpPost]
+
+    public void PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
+    {
+    }
 }
