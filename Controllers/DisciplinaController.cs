@@ -18,8 +18,24 @@ public class DisciplinaController : ControllerBase
     }
     [HttpPost]
 
-    public void PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
+    public DisciplinaResposta PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
-        _disciplinaServico.CriarDisciplina(novaDisciplina);
+        var disciplinaResposta = _disciplinaServico.CriarDisciplina(novaDisciplina);
+
+        return disciplinaResposta;
+    }
+    [HttpGet]
+
+    public List<DisciplinaResposta> GetDisciplinas()
+    {
+        var disciplinas = _disciplinaServico.ListarServicos();
+
+        return disciplinas;
+    }
+    [HttpGet("{int:id}")]
+    public DisciplinaResposta GetDisciplina([FromRoute] int id)
+    {
+        var disciplina = _disciplinaServico.BuscarDisciplinaPeloId(id);
+        return disciplina;
     }
 }
