@@ -20,5 +20,6 @@ public class DisciplinaController : ControllerBase
 
     public void PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
+        _disciplinaServico.CriarDisciplina(novaDisciplina);
     }
 }
