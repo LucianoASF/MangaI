@@ -72,7 +72,7 @@ public class DisciplinaServico
         return disciplinaResposta;
     }
 
-    public  DisciplinaResposta BuscarDisciplinaPeloId(int id)
+    public DisciplinaResposta BuscarDisciplinaPeloId(int id)
     {
         //Pedir a  disciplina do Repositorio
         var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
@@ -100,35 +100,35 @@ public class DisciplinaServico
         //Mandar o repositorio remover o modelo
         _disciplinaRepositorio.RemoverDisciplina(disciplina);
     }
-    
-    
-  public DisciplinaResposta AtualizarDisciplina
-    (int id, DisciplinaCriarAtualizarRequisicao disciplinaEditado)
-  {
-    //Buscar o modelo no repositorio
-    var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
 
-    if (disciplina is null)
+
+    public DisciplinaResposta AtualizarDisciplina
+      (int id, DisciplinaCriarAtualizarRequisicao disciplinaEditado)
     {
-      return null; //no futuro vai ser uma exceção
+        //Buscar o modelo no repositorio
+        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
+
+        if (disciplina is null)
+        {
+            return null; //no futuro vai ser uma exceção
+        }
+
+        //Copiar da Requisição para o Modelo
+        ConverterRequisicaoParaModelo(disciplinaEditado, disciplina);
+
+        //Mandar o repositorio salvar
+        _disciplinaRepositorio.AtualizarDisciplina();
+
+        //Copiar do Modelo para Resposta
+        return ConverterModeloParaResposta(disciplina);
     }
 
-    //Copiar da Requisição para o Modelo
-    ConverterRequisicaoParaModelo(disciplinaEditado, disciplina);
-
-    //Mandar o repositorio salvar
-    _disciplinaRepositorio.AtualizarDisciplina();
-
-    //Copiar do Modelo para Resposta
-    return ConverterModeloParaResposta(disciplina);
-  }
-
-  private void ConverterRequisicaoParaModelo
-    (DisciplinaCriarAtualizarRequisicao requisicao, Disciplina modelo)
-  {
-    modelo.Nome = requisicao.Nome;
-    modelo.CargaHoraria = requisicao.CargaHoraria;
-  }
+    private void ConverterRequisicaoParaModelo
+      (DisciplinaCriarAtualizarRequisicao requisicao, Disciplina modelo)
+    {
+        modelo.Nome = requisicao.Nome;
+        modelo.CargaHoraria = requisicao.CargaHoraria;
+    }
 
 }
 
