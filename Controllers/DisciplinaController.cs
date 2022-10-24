@@ -32,7 +32,7 @@ public class DisciplinaController : ControllerBase
 
         return disciplinas;
     }
-    [HttpGet("{int:id}")]
+    [HttpGet("{id:int}")]
     public DisciplinaResposta GetDisciplina([FromRoute] int id)
     {
         var disciplina = _disciplinaServico.BuscarDisciplinaPeloId(id);
