@@ -23,10 +23,6 @@ public class DisciplinaServico
         var disciplina = new Disciplina();
         ConverterRequisicaoParaModelo(novaDisciplina, disciplina);
 
-        //Regra de negócio
-        var agora = DateTime.Now;
-        disciplina.DataCriacao = agora;
-        disciplina.DataAtualizacao = agora;
 
         //Enviar a disciplina para o Repositorio salvar no BD
         disciplina = _disciplinaRepositorio.CriarDisciplina(disciplina);
