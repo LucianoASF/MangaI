@@ -1,9 +1,13 @@
 using MangaI.Data;
+using MangaI.Repositorios;
+using MangaI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<DisciplinaServico>();
+builder.Services.AddScoped<DisciplinaRepositorio>();
 
 //Adicionando a minha classe de contexto na API
 //Tem que acrescentar using Microsoft.EntityFrameworkCore;
