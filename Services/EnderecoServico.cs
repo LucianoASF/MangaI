@@ -48,7 +48,11 @@ public class EnderecoServico
     }
     public EnderecoResposta AtualizarEndereco(EnderecoCriarAtualizarRequisicao enderecoEditado, int id)
     {
-        var endereco = BuscarEnderecoPeloId(id);
+        var endereco = _enderecoRepositorio.BuscarEnderecoPeloId(id);
+        if (endereco is null)
+        {
+            throw new Exception("Endereço não encontrado!");
+        }
         enderecoEditado.Adapt(endereco);
         _enderecoRepositorio.AtualizarEndereco();
         return endereco.Adapt<EnderecoResposta>();

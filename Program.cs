@@ -10,6 +10,8 @@ builder.Services.AddScoped<DisciplinaServico>();
 builder.Services.AddScoped<DisciplinaRepositorio>();
 builder.Services.AddScoped<EnderecoServico>();
 builder.Services.AddScoped<EnderecoRepositorio>();
+builder.Services.AddScoped<ConteudoServico>();
+builder.Services.AddScoped<ConteudoRepositorio>();
 
 //Adicionando a minha classe de contexto na API
 //Tem que acrescentar using Microsoft.EntityFrameworkCore;
