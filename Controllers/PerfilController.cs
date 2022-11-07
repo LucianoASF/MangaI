@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
 
+[ApiController]
+[Route("perfil")]
 public class PerfilController : ControllerBase
 {
 
