@@ -1,6 +1,65 @@
+using Microsoft.AspNetCore.Mvc;
+using MangaI.Dtos;
+using MangaI.Services;
+
 namespace MangaI.Controllers;
 
-public class EnderecoController
+[ApiController]
+[Route("endereco")]
+public class EnderecoController : ControllerBase
 {
-    
+    private EnderecoServico _enderecoServico;
+
+    public EnderecoController([FromServices] EnderecoServico servico)
+    {
+        _enderecoServico = servico;
+    }
+    [HttpPost]
+    public EnderecoResposta PostEndereco([FromBody] EnderecoCriarAtualizarRequisicao novoEndereco)
+    {
+        return _enderecoServico.CriarEndereco(novoEndereco);
+    }
+    [HttpGet]
+    public ActionResult<List<EnderecoResposta>> GetEnderecos()
+    {
+        return Ok(_enderecoServico.ListarEnderecos());
+    }
+    [HttpGet("{id:int}")]
+    public ActionResult<EnderecoResposta> GetEndereco([FromRoute] int id)
+    {
+        try
+        {
+            return Ok(_enderecoServico.BuscarEnderecoPeloId(id));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+    [HttpDelete("{id:int}")]
+    public ActionResult DeleteEndereco([FromRoute] int id)
+    {
+        try
+        {
+            _enderecoServico.RemoverEndereco(id);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+    [HttpPut("{id:int}")]
+    public ActionResult<EnderecoResposta> PutEndereco([FromBody] EnderecoCriarAtualizarRequisicao enderecoEditado, [FromRoute] int id)
+    {
+        try
+        {
+            return Ok(_enderecoServico.AtualizarEndereco(enderecoEditado, id));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
 }

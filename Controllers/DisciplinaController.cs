@@ -46,7 +46,6 @@ public class DisciplinaController : ControllerBase
     public ActionResult<DisciplinaResposta> GetDisciplina([FromRoute] int id)
     {
 
-<<<<<<< HEAD
         try
         {
             //Buscando e retornando a disciplina a partir do servico
@@ -58,21 +57,6 @@ public class DisciplinaController : ControllerBase
         }
 
 
-=======
-        return disciplinas;
-    }
-    [HttpGet("{id:int}")]
-    public DisciplinaResposta GetDisciplina([FromRoute] int id)
-    {
-        var disciplina = _disciplinaServico.BuscarDisciplinaPeloId(id);
-        return disciplina;
-    }
-    [HttpPut("{id:int}")]
-    public DisciplinaResposta PutDisciplina([FromRoute] int id, [FromBody] DisciplinaCriarAtualizarRequisicao disciplinaEditada)
-    {
-        var disciplinaResposta = _disciplinaServico.AtualizarDisciplina(id, disciplinaEditada);
-        return disciplinaResposta;
->>>>>>> 071681e1cb3589616f251a8904690fe14f337d70
     }
 
     [HttpDelete("{id:int}")]

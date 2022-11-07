@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<DisciplinaServico>();
 builder.Services.AddScoped<DisciplinaRepositorio>();
+builder.Services.AddScoped<EnderecoServico>();
+builder.Services.AddScoped<EnderecoRepositorio>();
 
 //Adicionando a minha classe de contexto na API
 //Tem que acrescentar using Microsoft.EntityFrameworkCore;
