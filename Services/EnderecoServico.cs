@@ -13,6 +13,15 @@ public class EnderecoServico
     {
         _enderecoRepositorio = repositorio;
     }
+    private Endereco BuscarPeloId(int id, bool tracking = true)
+    {
+        var endereco = _enderecoRepositorio.BuscarEnderecoPeloId(id, tracking);
+        if (endereco is null)
+        {
+            throw new Exception("Endereço não encontrado!");
+        }
+        return endereco;
+    }
     public EnderecoResposta CriarEndereco(EnderecoCriarAtualizarRequisicao novoEndereco)
     {
         var endereco = novoEndereco.Adapt<Endereco>();
@@ -28,31 +37,19 @@ public class EnderecoServico
     }
     public EnderecoResposta BuscarEnderecoPeloId(int id)
     {
-        var endereco = _enderecoRepositorio.BuscarEnderecoPeloId(id);
-        if (endereco is null)
-        {
-            throw new Exception("Endereço não encontrado!");
-        }
+        var endereco = BuscarPeloId(id, false);
         var resposta = endereco.Adapt<EnderecoResposta>();
         return resposta;
 
     }
     public void RemoverEndereco(int id)
     {
-        var endereco = _enderecoRepositorio.BuscarEnderecoPeloId(id);
-        if (endereco is null)
-        {
-            throw new Exception("Endereço não encontrado!");
-        }
+        var endereco = BuscarPeloId(id);
         _enderecoRepositorio.RemoverEndereco(endereco);
     }
     public EnderecoResposta AtualizarEndereco(EnderecoCriarAtualizarRequisicao enderecoEditado, int id)
     {
-        var endereco = _enderecoRepositorio.BuscarEnderecoPeloId(id);
-        if (endereco is null)
-        {
-            throw new Exception("Endereço não encontrado!");
-        }
+        var endereco = BuscarPeloId(id);
         enderecoEditado.Adapt(endereco);
         _enderecoRepositorio.AtualizarEndereco();
         return endereco.Adapt<EnderecoResposta>();

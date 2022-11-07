@@ -1,6 +1,7 @@
 using MangaI.Data;
 using MangaI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaI.Repositorios;
 
@@ -19,11 +20,12 @@ public class EnderecoRepositorio
     }
     public List<Endereco> ListarEnderecos()
     {
-        return _contextoBD.Enderecos.ToList();
+        return _contextoBD.Enderecos.AsNoTracking().ToList();
     }
-    public Endereco BuscarEnderecoPeloId(int id)
+    public Endereco BuscarEnderecoPeloId(int id, bool tracking = true)
     {
-        return _contextoBD.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+        return tracking ? _contextoBD.Enderecos.FirstOrDefault(endereco => endereco.Id == id) :
+        _contextoBD.Enderecos.AsNoTracking().FirstOrDefault(endereco => endereco.Id == id);
     }
     public void RemoverEndereco(Endereco endereco)
     {

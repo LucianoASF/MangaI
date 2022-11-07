@@ -15,9 +15,10 @@ public class EnderecoController : ControllerBase
         _enderecoServico = servico;
     }
     [HttpPost]
-    public EnderecoResposta PostEndereco([FromBody] EnderecoCriarAtualizarRequisicao novoEndereco)
+    public ActionResult<EnderecoResposta> PostEndereco([FromBody] EnderecoCriarAtualizarRequisicao novoEndereco)
     {
-        return _enderecoServico.CriarEndereco(novoEndereco);
+        var resposta = _enderecoServico.CriarEndereco(novoEndereco);
+        return CreatedAtAction(nameof(GetEndereco), new { Id = resposta.Id }, resposta);
     }
     [HttpGet]
     public ActionResult<List<EnderecoResposta>> GetEnderecos()
