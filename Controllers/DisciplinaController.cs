@@ -8,6 +8,7 @@ namespace MangaI.Controllers;
 [Route("disciplinas")]
 public class DisciplinaController : ControllerBase
 {
+
     //Injetado no construtor
     private DisciplinaServico _disciplinaServico;
 
@@ -16,38 +17,80 @@ public class DisciplinaController : ControllerBase
     {
         _disciplinaServico = servico;
     }
-    [HttpPost]
 
-    public DisciplinaResposta PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
+    [HttpPost]
+    public ActionResult<DisciplinaResposta> PostDisciplina
+      ([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
+
+        //Enviar para o serviço
         var disciplinaResposta = _disciplinaServico.CriarDisciplina(novaDisciplina);
 
-        return disciplinaResposta;
+        //retornando a resposta
+        // return disicplinaResposta;
+        // return StatusCode(201, disciplinaResposta);
+        return CreatedAtAction(nameof(GetDisciplina),
+            new { id = disciplinaResposta.Id },
+           disciplinaResposta);
+
     }
+
     [HttpGet]
+    public ActionResult<List<DisciplinaResposta>> GetDisciplina()
+    {
+        //Pedir e retornar a lista que vem do servico
+        return Ok(_disciplinaServico.ListarDisciplinas());
+    }
 
-    public List<DisciplinaResposta> GetDisciplinas()
+    [HttpGet("{id:int}")]
+    public ActionResult<DisciplinaResposta> GetDisciplina([FromRoute] int id)
     {
-        var disciplinas = _disciplinaServico.ListarDisciplinas();
 
-        return disciplinas;
+        try
+        {
+            //Buscando e retornando a disciplina a partir do servico
+            return Ok(_disciplinaServico.BuscarDisciplinaPeloId(id));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+
+
     }
-    [HttpGet("{int:id}")]
-    public DisciplinaResposta GetDisciplina([FromRoute] int id)
-    {
-        var disciplina = _disciplinaServico.BuscarDisciplinaPeloId(id);
-        return disciplina;
-    }
-    [HttpPut("{id:int}")]
-    public DisciplinaResposta PutDisciplina([FromRoute] int id, [FromBody] DisciplinaCriarAtualizarRequisicao disciplinaEditada)
-    {
-        var disciplinaResposta = _disciplinaServico.AtualizarDisciplina(id, disciplinaEditada);
-        return disciplinaResposta;
-    }
+
     [HttpDelete("{id:int}")]
-
-    public void DeleteDisciplina(int id)
+    public ActionResult DeleteDisciplina([FromRoute] int id)
     {
-        _disciplinaServico.RemoverDisciplina(id);
+
+        try
+        {
+            //Mando o servico remover a disciplina
+            _disciplinaServico.RemoverDisciplina(id);
+
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+
+    }
+
+    [HttpPut("{id:int}")]
+    public ActionResult<DisciplinaResposta> PutDisciplina
+      ([FromRoute] int id, [FromBody] DisciplinaCriarAtualizarRequisicao disciplinaEditado)
+    {
+
+        try
+        {
+            return Ok(_disciplinaServico.AtualizarDisciplina(id, disciplinaEditado));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+
+
     }
 }

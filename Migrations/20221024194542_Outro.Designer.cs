@@ -3,6 +3,7 @@ using System;
 using MangaI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaI.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    partial class ContextoBDModelSnapshot : ModelSnapshot
+    [Migration("20221024194542_Outro")]
+    partial class Outro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

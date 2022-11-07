@@ -31,7 +31,7 @@ public class DisciplinaRepositorio
         return _contexto.Disciplinas.ToList();
     }
 
-    public Disciplina BuscarDisciplinaPeloId(int id)
+    public Disciplina BuscarDisciplinaPeloId(int id, bool tracking)
     {
         //Buscar pelo id no contexto
         return _contexto.Disciplinas.FirstOrDefault(disciplina => disciplina.Id == id);
