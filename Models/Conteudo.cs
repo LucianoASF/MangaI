@@ -10,7 +10,7 @@ public class Conteudo
 
     [Required]
     [Column(TypeName = "text")]
-    public string tema{ get; set; }
+    public string Tema { get; set; }
 
     [Required]
     public DateTime Dia { get; set; }
@@ -18,6 +18,6 @@ public class Conteudo
 
     //Propriedade de Navegação Conteudo 1 : N Frequencia
 
-    public List<Frequencia> Frequencias{ get; set; }
+    public List<Frequencia> Frequencias { get; set; }
 
 }

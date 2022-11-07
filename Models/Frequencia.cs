@@ -20,4 +20,15 @@ public class Frequencia
     //Chave Estrangeira Frequencia N : 1 Conteudo
 
     public int ConteudoId { get; set; }
+
+    //Propriedade de Navegação Frequencia N : 1 Matricula
+
+    public Matricula Matricula { get; set; }
+
+    //Chave Estrangeira Frequencia N : 1 Matricula
+
+    public int MatriculaId { get; set; }
+
+
+
 }

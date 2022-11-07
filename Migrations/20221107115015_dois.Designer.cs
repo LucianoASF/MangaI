@@ -3,6 +3,7 @@ using System;
 using MangaI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaI.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    partial class ContextoBDModelSnapshot : ModelSnapshot
+    [Migration("20221107115015_dois")]
+    partial class dois
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,11 +71,16 @@ namespace MangaI.Migrations
                     b.Property<DateTime>("Dia")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Tema")
+                    b.Property<int?>("MatriculaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("tema")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MatriculaId");
 
                     b.ToTable("Conteudos");
                 });
@@ -147,17 +154,12 @@ namespace MangaI.Migrations
                     b.Property<int>("ConteudoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MatriculaId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Presente")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ConteudoId");
-
-                    b.HasIndex("MatriculaId");
 
                     b.ToTable("Frequencias");
                 });
@@ -358,6 +360,13 @@ namespace MangaI.Migrations
                     b.Navigation("Turma");
                 });
 
+            modelBuilder.Entity("MangaI.Models.Conteudo", b =>
+                {
+                    b.HasOne("MangaI.Models.Matricula", null)
+                        .WithMany("Conteudos")
+                        .HasForeignKey("MatriculaId");
+                });
+
             modelBuilder.Entity("MangaI.Models.Frequencia", b =>
                 {
                     b.HasOne("MangaI.Models.Conteudo", "Conteudo")
@@ -366,15 +375,7 @@ namespace MangaI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MangaI.Models.Matricula", "Matricula")
-                        .WithMany("Frequencias")
-                        .HasForeignKey("MatriculaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Conteudo");
-
-                    b.Navigation("Matricula");
                 });
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
@@ -502,7 +503,7 @@ namespace MangaI.Migrations
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
                 {
-                    b.Navigation("Frequencias");
+                    b.Navigation("Conteudos");
 
                     b.Navigation("NotasAlunos");
                 });

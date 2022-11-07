@@ -24,9 +24,9 @@ public class Matricula
     //Propriedade de Navegação Matricula 1 : N NotaAluno
     public List<NotaAluno> NotasAlunos { get; set; }
 
-    //Propriedade de Navegação Matricula 1 : N Conteudo
+    //Propriedade de Navegação Matricula 1 : N Frequencia
 
-    public List<Conteudo> Conteudos { get; set; }
+    public List<Frequencia> Frequencias { get; set; }
 
     //Propriedade de Navegação Matricula N : 1 Turma
 
