@@ -2,7 +2,7 @@ using MangaI.Data;
 using MangaI.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mangal.Repositorios;
+namespace MangaI.Repositorios;
 
 public class CursoRepositorio
 {

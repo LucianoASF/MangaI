@@ -1,10 +1,10 @@
 using MangaI.Models;
-using Mangal.Dtos;
-using Mangal.Repositorios;
+using MangaI.Dtos;
+using MangaI.Repositorios;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mangal.Services;
+namespace MangaI.Services;
 
 public class CursoServico
 {

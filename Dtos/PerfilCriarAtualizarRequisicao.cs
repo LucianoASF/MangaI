@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace Mangal.Dtos;
+namespace MangaI.Dtos;
 
 public class PerfilCriarAtualizarRequisicao
 {

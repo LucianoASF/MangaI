@@ -1,8 +1,8 @@
-using Mangal.Dtos;
-using Mangal.Services;
+using MangaI.Dtos;
+using MangaI.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mangal.Controllers;
+namespace MangaI.Controllers;
 
 public class PerfilController : ControllerBase
 {

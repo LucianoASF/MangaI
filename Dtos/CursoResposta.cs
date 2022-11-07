@@ -1,4 +1,4 @@
-namespace Mangal.Dtos;
+namespace MangaI.Dtos;
 
 public class CursoResposta
 {
