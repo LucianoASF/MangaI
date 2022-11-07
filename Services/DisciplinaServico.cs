@@ -1,12 +1,14 @@
 using MangaI.Dtos;
 using MangaI.Models;
 using MangaI.Repositorios;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Services;
 
 public class DisciplinaServico
 {
+
     //Campo que é injetado no construtor
     private DisciplinaRepositorio _disciplinaRepositorio;
 
@@ -17,19 +19,18 @@ public class DisciplinaServico
     }
 
     public DisciplinaResposta CriarDisciplina
-       (DisciplinaCriarAtualizarRequisicao novaDisciplina)
+      (DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
         //Copiar os dados da Requisicao para o Modelo
-        var disciplina = new Disciplina();
-        ConverterRequisicaoParaModelo(novaDisciplina, disciplina);
+        var disciplina = novaDisciplina.Adapt<Disciplina>();
 
-
+      
         //Enviar a disciplina para o Repositorio salvar no BD
         disciplina = _disciplinaRepositorio.CriarDisciplina(disciplina);
 
 
         //Copiar do Modelo para a Resposta
-        var disciplinaResposta = ConverterModeloParaResposta(disciplina);
+        var disciplinaResposta = disciplina.Adapt<DisciplinaResposta>();
 
         //retornar a resposta
         return disciplinaResposta;
@@ -38,93 +39,62 @@ public class DisciplinaServico
 
     public List<DisciplinaResposta> ListarDisciplinas()
     {
-        //Pedir a lista de Disciplina do repositorio
+        //Pedir a lista de disciplinas do repositorio
         var disciplinas = _disciplinaRepositorio.ListarDisciplinas();
 
-        //Criar a lista de respostas
-        List<DisciplinaResposta> disciplinaRespostas = new();
-
-        //Copiar os dados do Modelo (Disciplina) para a Resposta (DisciplinaResposta)
-        foreach (var disciplina in disciplinas)
-        {
-            //Copiar de Modelo para Resposta
-            var disciplinaResposta = ConverterModeloParaResposta(disciplina);
-
-            //Adicionar a reposta na lista
-            disciplinaRespostas.Add(disciplinaResposta);
-        }
+        //Copiar da lista de Modelo para Lista de Resposta
+        var disciplinaRespostas = disciplinas.Adapt<List<DisciplinaResposta>>();
 
         //Retornar a lista de respostas
         return disciplinaRespostas;
     }
 
-    private DisciplinaResposta ConverterModeloParaResposta(Disciplina modelo)
+    public DisciplinaResposta BuscarDisciplinaPeloId(int id)
     {
-        var disciplinaResposta = new DisciplinaResposta();
-        disciplinaResposta.Id = modelo.Id;
-        disciplinaResposta.Nome = modelo.Nome;
-        disciplinaResposta.CargaHoraria = modelo.CargaHoraria;
-
-        return disciplinaResposta;
-    }
-
-    public  DisciplinaResposta BuscarDisciplinaPeloId(int id)
-    {
-        //Pedir a  disciplina do Repositorio
-        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
-
-        if (disciplina is null)
-        {
-            return null; //no futuro vai ser uma excecao
-        }
+        //Pedir a disciplina do Repositorio
+        var disciplina = BuscarPeloId(id, false);
 
         //Copiar do Modelo (Disciplina) para Resposta (DisciplinaResposta)
-        return ConverterModeloParaResposta(disciplina);
+        return disciplina.Adapt<DisciplinaResposta>();
 
     }
 
     public void RemoverDisciplina(int id)
     {
-        //Busar a disciplina (modelo) pelo id
-        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
-
-        if (disciplina is null)
-        {
-            return; //no futuro vai ser uma exceção
-        }
+        //Busar o Disciplina (modelo) pelo id
+        var disciplina = BuscarPeloId(id);
 
         //Mandar o repositorio remover o modelo
         _disciplinaRepositorio.RemoverDisciplina(disciplina);
     }
-    
-    
-  public DisciplinaResposta AtualizarDisciplina
-    (int id, DisciplinaCriarAtualizarRequisicao disciplinaEditado)
-  {
-    //Buscar o modelo no repositorio
-    var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id);
 
-    if (disciplina is null)
+    public DisciplinaResposta AtualizarDisciplina
+      (int id, DisciplinaCriarAtualizarRequisicao disciplinaEditado)
     {
-      return null; //no futuro vai ser uma exceção
+        //Buscar o modelo no repositorio
+        var disciplina = BuscarPeloId(id);
+
+        //Copiar da Requisição para o Modelo
+        disciplinaEditado.Adapt(disciplina);
+
+        //Mandar o repositorio salvar
+        _disciplinaRepositorio.AtualizarDisciplina();
+
+        //Copiar do Modelo para Resposta
+        return disciplina.Adapt<DisciplinaResposta>();
     }
 
-    //Copiar da Requisição para o Modelo
-    ConverterRequisicaoParaModelo(disciplinaEditado, disciplina);
+    private Disciplina BuscarPeloId(int id, bool tracking = true)
+    {
+        var disciplina = _disciplinaRepositorio.BuscarDisciplinaPeloId(id, tracking);
 
-    //Mandar o repositorio salvar
-    _disciplinaRepositorio.AtualizarDisciplina();
+        if (disciplina is null)
+        {
+            throw new Exception("Disciplina não encontrada!");
+        }
 
-    //Copiar do Modelo para Resposta
-    return ConverterModeloParaResposta(disciplina);
-  }
-
-  private void ConverterRequisicaoParaModelo
-    (DisciplinaCriarAtualizarRequisicao requisicao, Disciplina modelo)
-  {
-    modelo.Nome = requisicao.Nome;
-    modelo.CargaHoraria = requisicao.CargaHoraria;
-  }
+        return disciplina;
+    }
 
 }
 
