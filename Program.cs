@@ -31,6 +31,9 @@ builder.Services.AddScoped<TelefoneRepositorio>();
 builder.Services.AddScoped<AvaliacaoServico>();
 builder.Services.AddScoped<AvaliacaoRepositorio>();
 
+builder.Services.AddScoped<TurmaServico>();
+builder.Services.AddScoped<TurmaRepositorio>();
+
 
 
 //Adicionando a minha classe de contexto na API
