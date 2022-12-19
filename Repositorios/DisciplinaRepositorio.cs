@@ -1,6 +1,7 @@
 using MangaI.Data;
 using MangaI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MangaI.Repositorios;
 
@@ -34,7 +35,8 @@ public class DisciplinaRepositorio
     public Disciplina BuscarDisciplinaPeloId(int id, bool tracking)
     {
         //Buscar pelo id no contexto
-        return _contexto.Disciplinas.FirstOrDefault(disciplina => disciplina.Id == id);
+        return tracking ? _contexto.Disciplinas.FirstOrDefault(disciplina => disciplina.Id == id)
+        : _contexto.Disciplinas.AsNoTracking().FirstOrDefault(disciplina => disciplina.Id == id);
     }
 
     public void RemoverDisciplina(Disciplina disciplina)
