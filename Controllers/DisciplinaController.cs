@@ -9,10 +9,7 @@ namespace MangaI.Controllers;
 public class DisciplinaController : ControllerBase
 {
 
-    //Injetado no construtor
     private DisciplinaServico _disciplinaServico;
-
-    //Construtor com Injecao de Dependencia
     public DisciplinaController([FromServices] DisciplinaServico servico)
     {
         _disciplinaServico = servico;
@@ -26,9 +23,6 @@ public class DisciplinaController : ControllerBase
         //Enviar para o serviço
         var disciplinaResposta = _disciplinaServico.CriarDisciplina(novaDisciplina);
 
-        //retornando a resposta
-        // return disicplinaResposta;
-        // return StatusCode(201, disciplinaResposta);
         return CreatedAtAction(nameof(GetDisciplina),
             new { id = disciplinaResposta.Id },
            disciplinaResposta);

@@ -9,10 +9,7 @@ namespace MangaI.Controllers;
 [Route("cursos")]
 public class CursoController : ControllerBase
 {
-    //Injetado no construtor
     private CursoServico _cursoServico;
-
-    //Construtor com Injecao de Dependencia
     public CursoController([FromServices] CursoServico servico)
     {
         _cursoServico = servico;
@@ -26,9 +23,7 @@ public class CursoController : ControllerBase
         //Enviar para o serviço
         var cursoResposta = _cursoServico.CriarCurso(novoCurso);
 
-        //retornando a resposta
-        // return cursoResposta;
-        // return StatusCode(201, cursoResposta);
+
         return CreatedAtAction(nameof(GetCurso),
             new { id = cursoResposta.Id },
             cursoResposta);

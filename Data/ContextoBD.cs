@@ -21,9 +21,7 @@ public class ContextoBD : DbContext
     public DbSet<Telefone> Telefones { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Turma> Turmas { get; set; }
-
     public DbSet<Conteudo> Conteudos { get; set; }
-
 
 
 }

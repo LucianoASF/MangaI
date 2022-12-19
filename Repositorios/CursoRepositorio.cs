@@ -6,10 +6,8 @@ namespace MangaI.Repositorios;
 
 public class CursoRepositorio
 {
-    //Campo que vai ser injetado no construtor
     private ContextoBD _contexto;
 
-    //Construtor que injeta a dependencia
     public CursoRepositorio([FromServices] ContextoBD contexto)
     {
         _contexto = contexto;
@@ -20,8 +18,6 @@ public class CursoRepositorio
         //Manda o contexto salvar no BD
         _contexto.Cursos.Add(curso);
         _contexto.SaveChanges();
-
-        //Vai estar preenchido com a chave primária
         return curso;
     }
 
@@ -38,7 +34,6 @@ public class CursoRepositorio
 
     public void RemoverCurso(Curso curso)
     {
-        //Mandar o contexto remover
         _contexto.Remove(curso);
         _contexto.SaveChanges();
 
