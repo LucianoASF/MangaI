@@ -8,10 +8,9 @@ namespace MangaI.Repositorios;
 public class DisciplinaRepositorio
 {
 
-    //Campo que vai ser injetado no construtor
+
     private ContextoBD _contexto;
 
-    //Construtor que injeta a dependencia
     public DisciplinaRepositorio([FromServices] ContextoBD contexto)
     {
         _contexto = contexto;

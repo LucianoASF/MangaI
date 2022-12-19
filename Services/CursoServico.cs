@@ -20,16 +20,10 @@ public class CursoServico
     public CursoResposta CriarCurso
        (CursoCriarAtualizarRequisicao novoCurso)
     {
-        //Copiar os dados da Requisicao para o Modelo
+
         var curso = novoCurso.Adapt<Curso>();
-
-        //Enviar o curso para o Repositorio salvar no BD
         curso = _cursoRepositorio.CriarCurso(curso);
-
-        //Copiar do Modelo para a Resposta
         var cursoResposta = curso.Adapt<CursoResposta>();
-
-        //retornar a resposta
         return cursoResposta;
 
     }
@@ -43,8 +37,6 @@ public class CursoServico
         //Copiar da lista de Modelo para Lista de Resposta
         var cursoRespostas = cursos.Adapt<List<CursoResposta>>();
 
-
-        //Retornar a lista de respostas
         return cursoRespostas;
     }
 

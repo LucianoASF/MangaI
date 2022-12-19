@@ -6,10 +6,7 @@ namespace MangaI.Repositorios;
 
 public class PerfilRepositorio
 {
-    //Campo que vai ser injetado no construtor
     private ContextoBD _contexto;
-
-    //Construtor que injeta a dependencia
     public PerfilRepositorio([FromServices] ContextoBD contexto)
     {
         _contexto = contexto;

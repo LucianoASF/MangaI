@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Telefone
 {
     [Required]
-    public string Id { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [Column(TypeName = "varchar(45)")]

@@ -9,10 +9,7 @@ namespace MangaI.Controllers;
 public class PerfilController : ControllerBase
 {
 
-    //Injetado no construtor
     private PerfilServico _perfilServico;
-
-    //Construtor com Injecao de Dependencia
     public PerfilController([FromServices] PerfilServico servico)
     {
         _perfilServico = servico;
@@ -26,9 +23,6 @@ public class PerfilController : ControllerBase
         //Enviar para o serviço
         var perfilResposta = _perfilServico.CriarPerfil(novoPerfil);
 
-        //retornando a resposta
-        // return perfilResposta;
-        // return StatusCode(201, perfilResposta);
         return CreatedAtAction(nameof(GetPerfil),
             new { id = perfilResposta.Id },
             perfilResposta);

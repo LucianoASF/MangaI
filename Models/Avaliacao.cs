@@ -10,7 +10,7 @@ public class Avaliacao
 
     [Required]
     [Column(TypeName = "varchar(45)")]
-    public string Nome { get; set; }
+    public int Nome { get; set; }
 
     [Required]
     [Column(TypeName = "Decimal(13,2)")]
