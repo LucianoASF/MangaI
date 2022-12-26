@@ -87,4 +87,20 @@ public class DisciplinaController : ControllerBase
 
 
     }
+    [HttpPut("{disciplinaId:int}/matrizes/{matrizId:int}")]
+    public ActionResult<DisciplinaResposta> AtribuirMatriz([FromRoute] int disciplinaId, [FromRoute] int matrizId)
+    {
+        try
+        {
+            return Ok(_disciplinaServico.AtribuirMatriz(disciplinaId, matrizId));
+        }
+        catch (BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
 }

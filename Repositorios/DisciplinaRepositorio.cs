@@ -28,14 +28,14 @@ public class DisciplinaRepositorio
 
     public List<Disciplina> ListarDisciplinas()
     {
-        return _contexto.Disciplinas.ToList();
+        return _contexto.Disciplinas.Include(d => d.Matrizes).AsNoTracking().ToList();
     }
 
-    public Disciplina BuscarDisciplinaPeloId(int id, bool tracking)
+    public Disciplina BuscarDisciplinaPeloId(int id, bool tracking = true)
     {
         //Buscar pelo id no contexto
-        return tracking ? _contexto.Disciplinas.FirstOrDefault(disciplina => disciplina.Id == id)
-        : _contexto.Disciplinas.AsNoTracking().FirstOrDefault(disciplina => disciplina.Id == id);
+        return tracking ? _contexto.Disciplinas.Include(d => d.Matrizes).FirstOrDefault(disciplina => disciplina.Id == id)
+        : _contexto.Disciplinas.AsNoTracking().Include(d => d.Matrizes).FirstOrDefault(disciplina => disciplina.Id == id);
     }
 
     public void RemoverDisciplina(Disciplina disciplina)
@@ -50,6 +50,7 @@ public class DisciplinaRepositorio
     {
         _contexto.SaveChanges();
     }
+
 
 
 }

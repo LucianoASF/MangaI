@@ -6,4 +6,6 @@ public class DisciplinaResposta
     public string Nome { get; set; }
 
     public int CargaHoraria { get; set; }
+
+    public List<MatrizResposta> Matrizes { get; set; }
 }

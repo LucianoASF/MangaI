@@ -12,7 +12,7 @@ public class UsuarioCriarRequisicao
     public string Sexo { get; set; }
     public int PerfilId { get; set; }
     public int EnderecoId { get; set; }
-    public int MatrizId { get; set; }
+
 
     //  public EnderecoCriarAtualizarRequisicao Endereco { get; set; }
 

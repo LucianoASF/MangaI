@@ -21,13 +21,13 @@ public class Frequencia
 
     public int ConteudoId { get; set; }
 
-    //Propriedade de Navegação Frequencia N : 1 Matricula
+    //Propriedade de Navegação Frequencia N : 1 MatriculaPorTurma
 
-    public Matricula Matricula { get; set; }
+    public MatriculaPorTurma MatriculaPorTurma { get; set; }
 
-    //Chave Estrangeira Frequencia N : 1 Matricula
+    //Chave Estrangeira Frequencia N : 1 MatriculaPorTurma
 
-    public int MatriculaId { get; set; }
+    public int MatriculaPorTurmaId { get; set; }
 
 
 

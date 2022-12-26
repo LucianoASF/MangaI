@@ -25,8 +25,8 @@ public class Matriz
     public int CursoId { get; set; }
 
 
-    //propriedade de Navegação Matriz 1 : N Usuario
-    public List<Usuario> Usuarios { get; set; }
+    //propriedade de Navegação Matriz 1 : N Matricula
+    public List<Matricula> Matriculas { get; set; }
 
 
 

@@ -10,12 +10,14 @@ public class DisciplinaServico
 {
 
     //Campo que é injetado no construtor
-    private DisciplinaRepositorio _disciplinaRepositorio;
+    private readonly DisciplinaRepositorio _disciplinaRepositorio;
+    private readonly MatrizRepositorio _matrizRepositorio;
 
     //Construtor com injecao de dependencia
-    public DisciplinaServico([FromServices] DisciplinaRepositorio repositorio)
+    public DisciplinaServico([FromServices] DisciplinaRepositorio repositorio, [FromServices] MatrizRepositorio matrizRepositorio)
     {
         _disciplinaRepositorio = repositorio;
+        _matrizRepositorio = matrizRepositorio;
     }
 
     public DisciplinaResposta CriarDisciplina
@@ -24,7 +26,7 @@ public class DisciplinaServico
         //Copiar os dados da Requisicao para o Modelo
         var disciplina = novaDisciplina.Adapt<Disciplina>();
 
-      
+
         //Enviar a disciplina para o Repositorio salvar no BD
         disciplina = _disciplinaRepositorio.CriarDisciplina(disciplina);
 
@@ -94,6 +96,19 @@ public class DisciplinaServico
         }
 
         return disciplina;
+    }
+    public DisciplinaResposta AtribuirMatriz(int disciplinaId, int matrizId)
+    {
+        var disciplina = BuscarPeloId(disciplinaId);
+        var matriz = _matrizRepositorio.BuscarMatrizPeloId(matrizId);
+        if (disciplina.Matrizes.Exists(m => m.Id == matrizId))
+        {
+            throw new BadHttpRequestException("Essa Disciplina já esta adicionada nessa Matriz");
+        }
+        disciplina.Matrizes.Add(matriz);
+        _disciplinaRepositorio.AtualizarDisciplina();
+        return disciplina.Adapt<DisciplinaResposta>();
+
     }
 
 }

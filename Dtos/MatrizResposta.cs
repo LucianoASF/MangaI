@@ -6,4 +6,6 @@ public class MatrizResposta
     public int Versao { get; set; }
     public int CursoId { get; set; }
     public CursoResposta Curso { get; set; }
+
+    public List<DisciplinaResposta> Disciplinas { get; set; }
 }

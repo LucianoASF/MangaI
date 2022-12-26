@@ -21,21 +21,18 @@ public class Matricula
 
     public int UsuarioId { get; set; }
 
-    //Propriedade de Navegação Matricula 1 : N NotaAluno
-    public List<NotaAluno> NotasAlunos { get; set; }
 
-    //Propriedade de Navegação Matricula 1 : N Frequencia
+    //propriedade de Navegação Matricula 1 : N MatriculaPorTurma
 
-    public List<Frequencia> Frequencias { get; set; }
+    public List<MatriculaPorTurma> MatriculaPorTurmas { get; set; }
 
-    //Propriedade de Navegação Matricula N : 1 Turma
+    //propriedade de Navegação Matriz 1 : N Matricula
 
-    public Turma Turma { get; set; }
+    public Matriz Matriz { get; set; }
 
-    //Chave Estrangeira Matricula N : 1 Turma
+    //Chave Estrangeira Matricula N : 1 Matriz
 
-    public int TurmaId { get; set; }
-
+    public int MatrizId { get; set; }
 
 
 }

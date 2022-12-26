@@ -20,4 +20,12 @@ public class Conteudo
 
     public List<Frequencia> Frequencias { get; set; }
 
+    //Propriedade de Navegação Conteudo N : 1 Turma
+
+    public Turma Turma { get; set; }
+
+    //Chave Estrangeira Conteudo N : 1 Turma
+
+    public int TurmaId { get; set; }
+
 }

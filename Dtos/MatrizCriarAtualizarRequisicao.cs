@@ -4,4 +4,7 @@ public class MatrizCriarAtualizarRequisicao
 {
     public int Versao { get; set; }
     public int CursoId { get; set; }
+
+    public List<DisciplinaResposta> Disciplinas { get; set; }
+
 }

@@ -34,7 +34,8 @@ public class MatrizRepositorio
     public List<Matriz> ListarMatrizes()
     {
         return _contexto.Matrizes
-          //   .Include(matriz => matriz.Cliente)
+            //   .Include(matriz => matriz.Cliente)
+            .Include(matriz => matriz.Disciplinas)
           .Include(matriz => matriz.Curso)
 
           .AsNoTracking().ToList();
@@ -46,6 +47,7 @@ public class MatrizRepositorio
           tracking
           ? _contexto.Matrizes
         // .Include(matriz => matriz.Cliente) vai pegar o Inerjoin da tabela usuario
+        .Include(matriz => matriz.Disciplinas)
         .Include(matriz => matriz.Curso)
         .FirstOrDefault(a => a.Id == id)
 
@@ -53,6 +55,7 @@ public class MatrizRepositorio
 
         .AsNoTracking()
         // .Include(matriz => matriz.Cliente)
+        .Include(matriz => matriz.Disciplinas)
         .Include(matriz => matriz.Curso)
         .FirstOrDefault(a => a.Id == id);
     }
@@ -68,7 +71,7 @@ public class MatrizRepositorio
     public void AtualizarMatriz()
     {
         _contexto.SaveChanges();
-    
+
     }
 
 

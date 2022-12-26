@@ -12,13 +12,13 @@ public class NotaAluno
     [Column(TypeName = "decimal(13,2)")]
     public decimal NotaObtida { get; set; }
 
-    //Propriedade de Navegação NotaAluno N : 1 Matricula
+    //Propriedade de Navegação NotaAluno N : 1 MatriculaPorTurma
 
-    public Matricula Matricula { get; set; }
+    public MatriculaPorTurma MatriculaPorTurma { get; set; }
 
-    //Chave Estrangeira NotaAluno N : 1 Matricula
+    //Chave Estrangeira NotaAluno N : 1 MatriculaPorTurma
 
-    public int MatriculaId { get; set; }
+    public int MatriculaPorTurmaId { get; set; }
 
 
     //Propriedade de Navegação NotaAluno N : 1 Avaliação

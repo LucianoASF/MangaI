@@ -34,6 +34,9 @@ builder.Services.AddScoped<AvaliacaoRepositorio>();
 builder.Services.AddScoped<TurmaServico>();
 builder.Services.AddScoped<TurmaRepositorio>();
 
+builder.Services.AddScoped<MatriculaServico>();
+builder.Services.AddScoped<MatriculaRepositorio>();
+
 
 
 //Adicionando a minha classe de contexto na API

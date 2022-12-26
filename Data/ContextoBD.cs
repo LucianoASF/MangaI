@@ -22,6 +22,7 @@ public class ContextoBD : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Turma> Turmas { get; set; }
     public DbSet<Conteudo> Conteudos { get; set; }
+    public DbSet<MatriculaPorTurma> MatriculaPorTurmas { get; set; }
 
 
 }

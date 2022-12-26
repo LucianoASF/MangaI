@@ -13,10 +13,9 @@ public class UsuarioResposta
 
     public int PerfilId { get; set; }
     public int EnderecoId { get; set; }
-    public int MatrizId { get; set; }
     public PerfilResposta Perfil { get; set; }
     public EnderecoResposta Endereco { get; set; }
-    public MatrizResposta Matriz { get; set; }
+
 
     // public EnderecoResposta Endereco { get; set; }
     // public List<PerfilResposta> Perfis { get; set; }
