@@ -16,6 +16,11 @@ public class Usuario
     [Column(TypeName = "varchar(45)")]
     public string Email { get; set; }
 
+    
+    [Required]
+    [Column(TypeName = "varchar(45)")]
+    public string Senha { get; set; }
+
     [Required]
     [Column(TypeName = "varchar(25)")]
     public string CPF { get; set; }
