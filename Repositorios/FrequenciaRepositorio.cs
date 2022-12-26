@@ -14,11 +14,11 @@ public class FrequenciaRepositorio
         _contexto = contexto;
     }
 
-    public List<Frequencia> BuscarFrequencia(int conteudoId, int matriculaId)
+    public List<Frequencia> BuscarFrequencia(int conteudoId, int MatriculaPorTurmaId)
     {
         return _contexto.Frequencias
           .AsNoTracking()
-          .Where(a => a.ConteudoId == conteudoId && a.MatriculaId == matriculaId)
+          .Where(a => a.ConteudoId == conteudoId && a.MatriculaPorTurmaId == matriculaPorTurmaId)
           .ToList();
     }
 
@@ -35,7 +35,7 @@ public class FrequenciaRepositorio
         return _contexto.Frequencias
 
           .Include(frequencia => frequencia.Conteudo)
-          .Include(frequencia => frequencia.Matricula)
+          .Include(frequencia => frequencia.MatriculaPorTurmaId)
           .AsNoTracking().ToList();
     }
 
@@ -45,12 +45,12 @@ public class FrequenciaRepositorio
         tracking
         ? _contexto.Frequencias
         .Include(frequencia => frequencia.Conteudo)
-        .Include(frequencia => frequencia.Matricula)
+        .Include(frequencia => frequencia.MatriculaPorTurmaId)
         .FirstOrDefault(a => a.Id == id)
         : _contexto.Frequencias
         .AsNoTracking()
         .Include(frequencia => frequencia.Conteudo)
-        .Include(frequencia => frequencia.Matricula)
+        .Include(frequencia => frequencia.MatriculaPorTurmaId)
 
         .FirstOrDefault(a => a.Id == id);
     }

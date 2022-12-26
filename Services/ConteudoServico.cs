@@ -2,60 +2,78 @@ using MangaI.Dtos;
 using MangaI.Models;
 using MangaI.Repositorios;
 using Mapster;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Services;
 
 public class ConteudoServico
 {
-    private ConteudoRepositorio _conteudoRepositorio;
+     private readonly ConteudoRepositorio _conteudoRepositorio;
+  
 
-    public ConteudoServico(ConteudoRepositorio repositorio)
+    public ConteudoServico(
+        [FromServices] ConteudoRepositorio repositorio
+       
+      )
     {
+
         _conteudoRepositorio = repositorio;
+       
     }
-    private Conteudo BuscarPeloId(int id, bool tracking = true)
-    {
-        var resposta = _conteudoRepositorio.BuscarConteudoPeloId(id, tracking);
-        if (resposta is null)
-        {
-            throw new Exception("Conteúdo não encontrado!");
-        }
-        return resposta;
-    }
+
+
     public ConteudoResposta CriarConteudo(ConteudoCriarAtualizarRequisicao novoConteudo)
     {
+
         var conteudo = novoConteudo.Adapt<Conteudo>();
-        var resposta = _conteudoRepositorio.CriarConteudo(conteudo);
-        var respostaAdaptada = resposta.Adapt<ConteudoResposta>();
-        return respostaAdaptada;
+        conteudo = _conteudoRepositorio.CriarConteudo(conteudo);
+        var conteudoResposta = conteudo.Adapt<ConteudoResposta>();
+        return conteudoResposta;
 
     }
+
     public List<ConteudoResposta> ListarConteudos()
     {
-        var resposta = _conteudoRepositorio.ListarConteudos();
-        var respostaAdaptada = resposta.Adapt<List<ConteudoResposta>>();
-        return respostaAdaptada;
+        var avaliacoes = _conteudoRepositorio.ListarConteudos();
+
+        //copiar do modelo pra resposta e retornar
+        return avaliacoes.Adapt<List<ConteudoResposta>>();
     }
+
+    private Conteudo BuscarPeloId(int id, bool tracking = true)
+    {
+        var conteudo = _conteudoRepositorio.BuscarConteudoPeloId(id, tracking);
+
+        if (conteudo is null)
+        {
+            throw new Exception("Conteudo não encontrada");
+        }
+
+        return conteudo;
+    }
+
     public ConteudoResposta BuscarConteudoPeloId(int id)
     {
-        var resposta = BuscarPeloId(id, false);
-        var respostaAdaptada = resposta.Adapt<ConteudoResposta>();
-        return respostaAdaptada;
+        var conteudo = BuscarPeloId(id, false);
+
+        //Copiar do modelo pra resposta e retornar
+        return conteudo.Adapt<ConteudoResposta>();
     }
+
     public void RemoverConteudo(int id)
     {
         var conteudo = BuscarPeloId(id);
         _conteudoRepositorio.RemoverConteudo(conteudo);
-
-
     }
-    public ConteudoResposta AtualizarConteudo(int id, ConteudoCriarAtualizarRequisicao conteudoEditado)
+
+
+
+    public ConteudoResposta AtualizarConteudo(int id, ConteudoCriarAtualizarRequisicao conteudoEditada)
     {
         var conteudo = BuscarPeloId(id);
-        conteudoEditado.Adapt(conteudo);
+        conteudoEditada.Adapt(conteudo);
         _conteudoRepositorio.AtualizarConteudo();
         return conteudo.Adapt<ConteudoResposta>();
-
 
     }
 }

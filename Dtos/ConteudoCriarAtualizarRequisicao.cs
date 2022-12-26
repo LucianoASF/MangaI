@@ -9,4 +9,7 @@ public class ConteudoCriarAtualizarRequisicao
     public string Tema { get; set; }
     [Required(ErrorMessage = "Campo Obrigatorio")]
     public DateTime Dia { get; set; }
+
+     public int TurmaId { get; set; }
+
 }
