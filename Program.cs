@@ -40,6 +40,9 @@ builder.Services.AddScoped<UsuarioRepositorio>();
 builder.Services.AddScoped<FrequenciaServico>();
 builder.Services.AddScoped<FrequenciaRepositorio>();
 
+builder.Services.AddScoped<MatriculaPorTurmaServico>();
+builder.Services.AddScoped<MatriculaPorTurmaRepositorio>();
+
 
 
 

@@ -18,7 +18,7 @@ public class FrequenciaRepositorio
     {
         return _contexto.Frequencias
           .AsNoTracking()
-          .Where(a => a.ConteudoId == conteudoId && a.MatriculaPorTurmaId == matriculaPorTurmaId)
+          .Where(a => a.ConteudoId == conteudoId && a.MatriculaPorTurmaId == MatriculaPorTurmaId)
           .ToList();
     }
 
