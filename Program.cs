@@ -34,8 +34,12 @@ builder.Services.AddScoped<AvaliacaoRepositorio>();
 builder.Services.AddScoped<TurmaServico>();
 builder.Services.AddScoped<TurmaRepositorio>();
 
-builder.Services.AddScoped<MatriculaServico>();
-builder.Services.AddScoped<MatriculaRepositorio>();
+builder.Services.AddScoped<UsuarioServico>();
+builder.Services.AddScoped<UsuarioRepositorio>();
+
+builder.Services.AddScoped<FrequenciaServico>();
+builder.Services.AddScoped<FrequenciaRepositorio>();
+
 
 
 

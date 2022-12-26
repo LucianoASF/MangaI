@@ -33,7 +33,7 @@ public class TelefoneRepositorio
     public List<Telefone> ListarTelefones()
     {
         return _contexto.Telefones
-          //   .Include(telefone => telefone.Cliente)
+        
           .Include(telefone => telefone.Usuario)
           .AsNoTracking().ToList();
     }
@@ -41,16 +41,14 @@ public class TelefoneRepositorio
     public Telefone BuscarTelefonePeloId(int id, bool tracking = true)
     {
         return
-          tracking
-          ? _contexto.Telefones
-        // .Include(telefone => telefone.Cliente) vai pegar o Inerjoin da tabela usuario
+        tracking
+        ? _contexto.Telefones
         .Include(telefone => telefone.Usuario)
         .FirstOrDefault(a => a.Id == id)
 
         : _contexto.Telefones
 
         .AsNoTracking()
-   // .Include(telefone => telefone.Cliente)
         .Include(telefone => telefone.Usuario)
         .FirstOrDefault(a => a.Id == id);
     }

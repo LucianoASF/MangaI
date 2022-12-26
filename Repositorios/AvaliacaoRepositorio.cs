@@ -34,25 +34,22 @@ public class AvaliacaoRepositorio
     public List<Avaliacao> ListarAvaliacoes()
     {
         return _contexto.Avaliacoes
-          //   .Include(avaliacao => avaliacao.Cliente)
           .Include(avaliacao => avaliacao.Turma)
-
           .AsNoTracking().ToList();
     }
 
     public Avaliacao BuscarAvaliacaoPeloId(int id, bool tracking = true)
     {
         return
-          tracking
-          ? _contexto.Avaliacoes
-        // .Include(avaliacao => avaliacao.Cliente) vai pegar o Inerjoin da tabela usuario
+        tracking
+        ? _contexto.Avaliacoes
         .Include(avaliacao => avaliacao.Turma)
         .FirstOrDefault(a => a.Id == id)
 
         : _contexto.Avaliacoes
 
         .AsNoTracking()
-        // .Include(avaliacao => avaliacao.Cliente)
+       
         .Include(avaliacao => avaliacao.Turma)
         .FirstOrDefault(a => a.Id == id);
     }

@@ -13,12 +13,9 @@ public class MatrizServico
 
     public MatrizServico(
         [FromServices] MatrizRepositorio repositorio
-        // [FromServices] CursoRepositorio cRepositorio
       )
     {
-
         _matrizRepositorio = repositorio;
-        // _cursoRepositorio = cRepositorio;
     }
 
     public MatrizResposta CriarMatriz(MatrizCriarAtualizarRequisicao novaMatriz)
@@ -34,8 +31,7 @@ public class MatrizServico
     public List<MatrizResposta> ListarMatrizes()
     {
         var matrizes = _matrizRepositorio.ListarMatrizes();
-
-        //copiar do modelo pra resposta e retornar
+        
         return matrizes.Adapt<List<MatrizResposta>>();
     }
 
