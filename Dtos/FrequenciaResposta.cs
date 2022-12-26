@@ -7,9 +7,9 @@ public class FrequenciaResposta
     public bool Presente { get; set; }
 
     public int ConteudoId { get; set; }
-     public int MatriculaPorTurmaId { get; set; }
+    public int MatriculaPorTurmaId { get; set; }
 
-     public ConteudoResposta Conteudo { get; set; }
-     
-     public MatriculaPorTurmaIdResposta MatriculaPorTurmaId { get; set; }
+    public ConteudoResposta Conteudo { get; set; }
+
+    public MatriculaPorTurmaResposta MatriculaPorTurma { get; set; }
 }
