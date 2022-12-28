@@ -9,7 +9,7 @@ namespace MangaI.Controllers;
 [Route("cursos")]
 public class CursoController : ControllerBase
 {
-    private CursoServico _cursoServico;
+    private readonly CursoServico _cursoServico;
     public CursoController([FromServices] CursoServico servico)
     {
         _cursoServico = servico;

@@ -6,7 +6,7 @@ namespace MangaI.Repositorios;
 
 public class PerfilRepositorio
 {
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
     public PerfilRepositorio([FromServices] ContextoBD contexto)
     {
         _contexto = contexto;

@@ -9,7 +9,7 @@ namespace MangaI.Services;
 public class CursoServico
 {
     //Campo que é injetado no construtor
-    private CursoRepositorio _cursoRepositorio;
+    private readonly CursoRepositorio _cursoRepositorio;
 
     //Construtor com injecao de dependencia
     public CursoServico([FromServices] CursoRepositorio repositorio)

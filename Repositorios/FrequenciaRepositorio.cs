@@ -7,7 +7,7 @@ namespace MangaI.Repositorios;
 
 public class FrequenciaRepositorio
 {
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
 
     public FrequenciaRepositorio([FromServices] ContextoBD contexto)
     {

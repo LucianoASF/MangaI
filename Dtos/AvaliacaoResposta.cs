@@ -3,7 +3,7 @@ namespace MangaI.Dtos;
 public class AvaliacaoResposta
 {
     public int Id { get; set; }
-    public int Nome { get; set; }
+    public string Nome { get; set; }
     public Decimal Valor { get; set; }
     public DateTime Data { get; set; }
 

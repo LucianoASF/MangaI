@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MangaI.Repositorios;
 
-    public class ConteudoRepositorio
+public class ConteudoRepositorio
 {
-    
-    private ContextoBD _contexto;
+
+    private readonly ContextoBD _contexto;
 
     public ConteudoRepositorio([FromServices] ContextoBD contexto)
     {
@@ -50,7 +50,7 @@ namespace MangaI.Repositorios;
         : _contexto.Conteudos
 
         .AsNoTracking()
-       
+
         .Include(conteudo => conteudo.Turma)
         .FirstOrDefault(a => a.Id == id);
     }

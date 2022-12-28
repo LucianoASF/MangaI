@@ -9,7 +9,7 @@ namespace MangaI.Controllers;
 public class PerfilController : ControllerBase
 {
 
-    private PerfilServico _perfilServico;
+    private readonly PerfilServico _perfilServico;
     public PerfilController([FromServices] PerfilServico servico)
     {
         _perfilServico = servico;

@@ -9,7 +9,7 @@ public class DisciplinaRepositorio
 {
 
 
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
 
     public DisciplinaRepositorio([FromServices] ContextoBD contexto)
     {

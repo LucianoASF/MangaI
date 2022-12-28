@@ -7,8 +7,8 @@ namespace MangaI.Repositorios;
 
 public class AvaliacaoRepositorio
 {
-    
-    private ContextoBD _contexto;
+
+    private readonly ContextoBD _contexto;
 
     public AvaliacaoRepositorio([FromServices] ContextoBD contexto)
     {
@@ -49,7 +49,7 @@ public class AvaliacaoRepositorio
         : _contexto.Avaliacoes
 
         .AsNoTracking()
-       
+
         .Include(avaliacao => avaliacao.Turma)
         .FirstOrDefault(a => a.Id == id);
     }

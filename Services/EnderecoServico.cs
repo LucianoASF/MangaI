@@ -8,7 +8,7 @@ namespace MangaI.Services;
 
 public class EnderecoServico
 {
-    private EnderecoRepositorio _enderecoRepositorio;
+    private readonly EnderecoRepositorio _enderecoRepositorio;
     public EnderecoServico([FromServices] EnderecoRepositorio repositorio)
     {
         _enderecoRepositorio = repositorio;

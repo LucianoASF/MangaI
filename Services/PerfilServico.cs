@@ -9,7 +9,7 @@ namespace MangaI.Services;
 public class PerfilServico
 {
     //Campo que é injetado no construtor
-    private PerfilRepositorio _perfilRepositorio;
+    private readonly PerfilRepositorio _perfilRepositorio;
 
     //Construtor com injecao de dependencia
     public PerfilServico([FromServices] PerfilRepositorio repositorio)

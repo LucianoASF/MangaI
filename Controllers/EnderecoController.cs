@@ -8,7 +8,7 @@ namespace MangaI.Controllers;
 [Route("endereco")]
 public class EnderecoController : ControllerBase
 {
-    private EnderecoServico _enderecoServico;
+    private readonly EnderecoServico _enderecoServico;
 
     public EnderecoController([FromServices] EnderecoServico servico)
     {

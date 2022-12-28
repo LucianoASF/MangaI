@@ -7,7 +7,7 @@ namespace MangaI.Repositorios;
 
 public class EnderecoRepositorio
 {
-    private ContextoBD _contextoBD;
+    private readonly ContextoBD _contextoBD;
     public EnderecoRepositorio([FromServices] ContextoBD contexto)
     {
         _contextoBD = contexto;

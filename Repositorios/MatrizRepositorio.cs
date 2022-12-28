@@ -8,7 +8,7 @@ namespace MangaI.Repositorios;
 public class MatrizRepositorio
 {
 
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
 
     public MatrizRepositorio([FromServices] ContextoBD contexto)
     {

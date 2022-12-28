@@ -9,7 +9,7 @@ namespace MangaI.Controllers;
 public class DisciplinaController : ControllerBase
 {
 
-    private DisciplinaServico _disciplinaServico;
+    private readonly DisciplinaServico _disciplinaServico;
     public DisciplinaController([FromServices] DisciplinaServico servico)
     {
         _disciplinaServico = servico;

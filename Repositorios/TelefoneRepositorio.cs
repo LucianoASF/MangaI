@@ -7,7 +7,7 @@ namespace MangaI.Repositorios;
 
 public class TelefoneRepositorio
 {
-    private ContextoBD _contexto;
+    private readonly ContextoBD _contexto;
 
     public TelefoneRepositorio([FromServices] ContextoBD contexto)
     {
@@ -33,7 +33,7 @@ public class TelefoneRepositorio
     public List<Telefone> ListarTelefones()
     {
         return _contexto.Telefones
-        
+
           .Include(telefone => telefone.Usuario)
           .AsNoTracking().ToList();
     }
@@ -59,10 +59,10 @@ public class TelefoneRepositorio
         _contexto.SaveChanges();
     }
 
-  public void AtualizarTelefone()
+    public void AtualizarTelefone()
     {
         _contexto.SaveChanges();
-       
+
     }
 
 }
