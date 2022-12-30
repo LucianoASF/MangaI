@@ -14,7 +14,7 @@ public class Endereco
     public string Rua { get; set; }
 
     [Required]
-    [Column(TypeName = "varchar(45)")]
+    [Column(TypeName = "varchar(20)")]
     public string Cep { get; set; }
 
     [Required]

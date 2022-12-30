@@ -16,17 +16,17 @@ public class Usuario
     [Column(TypeName = "varchar(45)")]
     public string Email { get; set; }
 
-    
+
     [Required]
-    [Column(TypeName = "varchar(45)")]
+    [Column(TypeName = "varchar(60)")]
     public string Senha { get; set; }
 
     [Required]
-    [Column(TypeName = "varchar(25)")]
+    [Column(TypeName = "varchar(14)")]
     public string CPF { get; set; }
 
     [Required]
-    [Column(TypeName = "varchar(45)")]
+    [Column(TypeName = "varchar(25)")]
     public string RG { get; set; }
 
     [Required]
@@ -56,7 +56,7 @@ public class Usuario
     public int EnderecoId { get; set; }
 
     //Propriedade de Navegação Usuario 1 : N Matricula
-    public List<Matricula> Matriculas { get; set; } 
+    public List<Matricula> Matriculas { get; set; }
 
 
 }

@@ -8,11 +8,6 @@ public class Matricula
     [Required]
     public int Id { get; set; }
 
-    [Column(TypeName = "Decimal(13,2)")]
-
-
-    public Decimal NotaFinal { get; set; }
-
     //Propriedade de Navegação Matricula N : 1 Usuario
 
     public Usuario Usuario { get; set; }

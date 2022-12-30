@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MangaI.Models;
 
@@ -6,6 +7,9 @@ public class MatriculaPorTurma
 {
     [Required]
     public int Id { get; set; }
+
+    [Column(TypeName = "Decimal(13,2)")]
+
     public Decimal? NotaFinal { get; set; }
 
     //propriedade de Navegação Matricula 1 : N MatriculaPorTurma
