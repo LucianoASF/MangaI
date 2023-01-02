@@ -14,9 +14,11 @@ public class MatriculaPorTurmaController : ControllerBase
         _servico = m;
     }
     [HttpPost]
-    public MatriculaPorTurmaResposta PostMatriculaPorTurma([FromBody] MatriculaPorTurmaCriarAtualizarRequisicao novaMatricula)
+    public ActionResult<MatriculaPorTurmaResposta> PostMatriculaPorTurma([FromBody] MatriculaPorTurmaCriarAtualizarRequisicao novaMatricula)
     {
-        return _servico.CriarMatriculaPorTurma(novaMatricula);
+        var resposta = _servico.CriarMatriculaPorTurma(novaMatricula);
+        return CreatedAtAction(nameof(GetMatriculaPorTurma), new { Id = resposta.Id }, resposta);
+
     }
     [HttpGet]
     public ActionResult<List<MatriculaPorTurmaResposta>> GetMatriculasPorTurmas()

@@ -11,7 +11,7 @@ namespace MangaI.Controllers;
 
 public class FrequenciaController : ControllerBase
 {
- private readonly FrequenciaServico _frequenciaServico;
+    private readonly FrequenciaServico _frequenciaServico;
 
     public FrequenciaController([FromServices] FrequenciaServico servico)
     {
@@ -24,7 +24,8 @@ public class FrequenciaController : ControllerBase
         try
         {
             var frequenciaResposta = _frequenciaServico.CriarFrequencia(novaFrequencia);
-            return StatusCode(201, frequenciaResposta);
+            return CreatedAtAction(nameof(GetFrequencia), new { Id = frequenciaResposta.Id }, frequenciaResposta);
+
         }
         catch (BadHttpRequestException e)
         {
@@ -83,5 +84,5 @@ public class FrequenciaController : ControllerBase
         }
     }
 
-   
+
 }

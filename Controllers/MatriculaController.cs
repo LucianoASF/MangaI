@@ -15,9 +15,11 @@ public class MatriculaController : ControllerBase
         _matricula = servico;
     }
     [HttpPost]
-    public MatriculaResposta PostMatricula([FromBody] MatriculaCriarAtualizarRequisicao matricula)
+    public ActionResult<MatriculaResposta> PostMatricula([FromBody] MatriculaCriarAtualizarRequisicao matricula)
     {
-        return _matricula.CriarMatricula(matricula);
+        var resposta = _matricula.CriarMatricula(matricula);
+        return CreatedAtAction(nameof(GetMatricula), new { Id = resposta.Id }, resposta);
+
     }
     [HttpGet]
     public ActionResult<List<MatriculaResposta>> GetMatriculas()

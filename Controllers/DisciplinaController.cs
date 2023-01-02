@@ -16,8 +16,7 @@ public class DisciplinaController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<DisciplinaResposta> PostDisciplina
-      ([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
+    public ActionResult<DisciplinaResposta> PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
 
         //Enviar para o serviço
@@ -88,15 +87,11 @@ public class DisciplinaController : ControllerBase
 
     }
     [HttpPut("{disciplinaId:int}/matrizes/{matrizId:int}")]
-    public ActionResult<DisciplinaResposta> AtribuirMatriz([FromRoute] int disciplinaId, [FromRoute] int matrizId)
+    public ActionResult<DisciplinaResposta> AtribuirOuDesatribuir([FromRoute] int disciplinaId, [FromRoute] int matrizId)
     {
         try
         {
-            return Ok(_disciplinaServico.AtribuirMatriz(disciplinaId, matrizId));
-        }
-        catch (BadHttpRequestException e)
-        {
-            return BadRequest(e.Message);
+            return Ok(_disciplinaServico.AtribuirOuDesatribuir(disciplinaId, matrizId));
         }
         catch (Exception e)
         {

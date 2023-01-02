@@ -16,13 +16,11 @@ public class CursoController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<CursoResposta> PostCurso
-      ([FromBody] CursoCriarAtualizarRequisicao novoCurso)
+    public ActionResult<CursoResposta> PostCurso([FromBody] CursoCriarAtualizarRequisicao novoCurso)
     {
 
         //Enviar para o serviço
         var cursoResposta = _cursoServico.CriarCurso(novoCurso);
-
 
         return CreatedAtAction(nameof(GetCurso),
             new { id = cursoResposta.Id },

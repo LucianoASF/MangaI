@@ -7,5 +7,5 @@ public class DisciplinaResposta
 
     public int CargaHoraria { get; set; }
 
-   
+
 }

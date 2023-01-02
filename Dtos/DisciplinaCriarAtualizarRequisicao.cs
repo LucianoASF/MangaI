@@ -12,6 +12,5 @@ public class DisciplinaCriarAtualizarRequisicao
     [Range(1, 1000, ErrorMessage = "Duração deve ser entre {1} e {2}")]
     public int CargaHoraria { get; set; }
 
-    public List<MatrizResposta> Matrizes { get; set; }
 
 }

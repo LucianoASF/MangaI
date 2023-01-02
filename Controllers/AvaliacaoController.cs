@@ -10,66 +10,68 @@ namespace MangaI.Controllers;
 [Route("avaliacoes")]
 public class AvaliacaoController : ControllerBase
 {
-  private readonly AvaliacaoServico _avaliacaoServico;
+    private readonly AvaliacaoServico _avaliacaoServico;
 
-  public AvaliacaoController([FromServices] AvaliacaoServico servico)
-  {
-    _avaliacaoServico = servico;
-  }
+    public AvaliacaoController([FromServices] AvaliacaoServico servico)
+    {
+        _avaliacaoServico = servico;
+    }
 
 
-  
 
-  [HttpPost]
-  public ActionResult<AvaliacaoResposta>
-    PostAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao novaAvaliacao)
-  {
-    try
-    {
-      return StatusCode(201, _avaliacaoServico.CriarAvaliacao(novaAvaliacao));
-    }
-    catch (BadHttpRequestException e)
-    {
-      return BadRequest(e.Message);
-    }
-  }
 
-  [HttpGet]
-  public ActionResult<List<AvaliacaoResposta>> GetAvaliacoes()
-  {
-    return Ok(_avaliacaoServico.ListarAvaliacoes());
-  }
+    [HttpPost]
+    public ActionResult<AvaliacaoResposta>
+      PostAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao novaAvaliacao)
+    {
+        try
+        {
+            var resposta = _avaliacaoServico.CriarAvaliacao(novaAvaliacao);
+            return CreatedAtAction(nameof(GetAvaliacao), new { Id = resposta.Id }, resposta);
 
-  [HttpGet("{id:int}")]
-  public ActionResult<AvaliacaoResposta> GetAvaliacao([FromRoute] int id)
-  {
-    try
-    {
-      return Ok(_avaliacaoServico.BuscarAvaliacaoPeloId(id));
+        }
+        catch (BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    catch (Exception e)
-    {
-      return NotFound(e.Message);
-    }
-  }
 
-  [HttpDelete("{id:int}")]
-  public ActionResult DeleteAvaliacao([FromRoute] int id)
-  {
-    try
+    [HttpGet]
+    public ActionResult<List<AvaliacaoResposta>> GetAvaliacoes()
     {
-      _avaliacaoServico.RemoverAvaliacao(id);
-      return NoContent();
+        return Ok(_avaliacaoServico.ListarAvaliacoes());
     }
-    catch (BadHttpRequestException e)
+
+    [HttpGet("{id:int}")]
+    public ActionResult<AvaliacaoResposta> GetAvaliacao([FromRoute] int id)
     {
-      return BadRequest(e.Message);
+        try
+        {
+            return Ok(_avaliacaoServico.BuscarAvaliacaoPeloId(id));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
-    catch (Exception e)
+
+    [HttpDelete("{id:int}")]
+    public ActionResult DeleteAvaliacao([FromRoute] int id)
     {
-      return NotFound(e.Message);
+        try
+        {
+            _avaliacaoServico.RemoverAvaliacao(id);
+            return NoContent();
+        }
+        catch (BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
-  }
 
     [HttpPut("{id:int}")]
     public ActionResult<AvaliacaoResposta> PutAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao avaliacaoEditada, [FromRoute] int id)

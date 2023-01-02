@@ -23,7 +23,8 @@ public class UsuarioController : ControllerBase
         try
         {
             var usuarioResposta = _usuarioServico.CriarUsuario(novoUsuario);
-            return StatusCode(201, usuarioResposta);
+            return CreatedAtAction(nameof(GetUsuario), new { Id = usuarioResposta.Id }, usuarioResposta);
+
         }
         catch (BadHttpRequestException e)
         {
@@ -82,5 +83,5 @@ public class UsuarioController : ControllerBase
         }
     }
 
-   
+
 }

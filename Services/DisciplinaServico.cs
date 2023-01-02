@@ -97,15 +97,22 @@ public class DisciplinaServico
 
         return disciplina;
     }
-    public DisciplinaResposta AtribuirMatriz(int disciplinaId, int matrizId)
+    public DisciplinaResposta AtribuirOuDesatribuir(int disciplinaId, int matrizId)
     {
         var disciplina = BuscarPeloId(disciplinaId);
         var matriz = _matrizRepositorio.BuscarMatrizPeloId(matrizId);
+        if (matriz is null)
+        {
+            throw new Exception("Disciplina não encontrada!");
+        }
         if (disciplina.Matrizes.Exists(m => m.Id == matrizId))
         {
-            throw new BadHttpRequestException("Essa Disciplina já esta adicionada nessa Matriz");
+            disciplina.Matrizes.Remove(matriz);
         }
-        disciplina.Matrizes.Add(matriz);
+        else
+        {
+            disciplina.Matrizes.Add(matriz);
+        }
         _disciplinaRepositorio.AtualizarDisciplina();
         return disciplina.Adapt<DisciplinaResposta>();
 

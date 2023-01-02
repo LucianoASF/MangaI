@@ -128,7 +128,7 @@ namespace MangaI.Migrations
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasColumnType("varchar(45)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -176,9 +176,6 @@ namespace MangaI.Migrations
                     b.Property<int>("MatrizId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("NotaFinal")
-                        .HasColumnType("Decimal(13,2)");
-
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
@@ -201,7 +198,7 @@ namespace MangaI.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("NotaFinal")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("Decimal(13,2)");
 
                     b.Property<int>("TurmaId")
                         .HasColumnType("int");
@@ -320,7 +317,7 @@ namespace MangaI.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("varchar(14)");
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime(6)");
@@ -341,7 +338,11 @@ namespace MangaI.Migrations
 
                     b.Property<string>("RG")
                         .IsRequired()
-                        .HasColumnType("varchar(45)");
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)");
 
                     b.Property<string>("Sexo")
                         .IsRequired()
