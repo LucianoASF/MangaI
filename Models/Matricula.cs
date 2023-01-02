@@ -29,5 +29,9 @@ public class Matricula
 
     public int MatrizId { get; set; }
 
+    public int AnoComeco { get; set; }
+
+    public int? AnoFim { get; set; }
+
 
 }

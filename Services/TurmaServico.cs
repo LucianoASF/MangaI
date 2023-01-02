@@ -9,10 +9,12 @@ namespace MangaI.Services;
 public class TurmaServico
 {
     private readonly TurmaRepositorio _turmaRepositorio;
+    private readonly AvaliacaoRepositorio _avaliacaoRepositorio;
 
-    public TurmaServico([FromServices] TurmaRepositorio repositorio)
+    public TurmaServico([FromServices] TurmaRepositorio repositorio, [FromServices] AvaliacaoRepositorio ar)
     {
         _turmaRepositorio = repositorio;
+        _avaliacaoRepositorio = ar;
     }
     public TurmaResposta CriarTurma(TurmaCriarAtualizarRequisicao turma)
     {
@@ -50,6 +52,11 @@ public class TurmaServico
         novaTurma.Adapt(turma);
         _turmaRepositorio.AtualizarTurma();
         return turma.Adapt<TurmaResposta>();
+    }
+    public List<AvaliacaoResposta> BuscarAvaliacaoesDaTurma(int turmaId)
+    {
+        return _avaliacaoRepositorio.BuscarAvaliacaoesDaTurma(turmaId).Adapt<List<AvaliacaoResposta>>();
+
     }
 
 }

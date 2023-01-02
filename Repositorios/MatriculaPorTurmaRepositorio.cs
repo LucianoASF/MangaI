@@ -25,8 +25,8 @@ public class MatriculaPorTurmaRepositorio
     }
     public MatriculaPorTurma BuscarMatriculaPeloId(int id, bool tracking = true)
     {
-        return tracking ? _contextoBD.MatriculaPorTurmas.FirstOrDefault(m => m.Id == id)
-        : _contextoBD.MatriculaPorTurmas.AsNoTracking().FirstOrDefault(m => m.Id == id);
+        return tracking ? _contextoBD.MatriculaPorTurmas.Include(m => m.Matricula).Include(m => m.Turma).FirstOrDefault(m => m.Id == id)
+        : _contextoBD.MatriculaPorTurmas.AsNoTracking().Include(m => m.Matricula).Include(m => m.Turma).FirstOrDefault(m => m.Id == id);
     }
     public void RemoverMatriculaPorTurma(MatriculaPorTurma matricula)
     {

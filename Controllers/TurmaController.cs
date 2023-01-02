@@ -62,6 +62,19 @@ public class TurmaController : ControllerBase
             return NotFound(e.Message);
         }
     }
+    [HttpGet("{turmaId:int}/avaliacoes")]
+
+    public ActionResult<List<TurmaResposta>> GetAvaliacoesPorTurma([FromRoute] int turmaId)
+    {
+        try
+        {
+            return Ok(_turmaServico.BuscarAvaliacaoesDaTurma(turmaId));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
 
 
 

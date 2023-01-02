@@ -24,8 +24,8 @@ public class MatriculaRepositorio
     }
     public Matricula BuscarMatriculaPeloId(int id, bool tracking = true)
     {
-        return tracking ? _contexto.Matriculas.FirstOrDefault(m => m.Id == id) :
-        _contexto.Matriculas.AsNoTracking().FirstOrDefault(m => m.Id == id);
+        return tracking ? _contexto.Matriculas.Include(m => m.Usuario).Include(m => m.Matriz).FirstOrDefault(m => m.Id == id) :
+        _contexto.Matriculas.AsNoTracking().Include(m => m.Usuario).Include(m => m.Matriz).FirstOrDefault(m => m.Id == id);
     }
     public void RemoverMatricula(Matricula matricula)
     {
