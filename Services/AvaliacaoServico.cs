@@ -68,7 +68,6 @@ public class AvaliacaoServico
     }
 
 
-
     public AvaliacaoResposta AtualizarAvaliacao(int id, AvaliacaoCriarAtualizarRequisicao avaliacaoEditada)
     {
         var avaliacao = BuscarPeloId(id);

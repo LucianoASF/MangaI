@@ -46,6 +46,8 @@ builder.Services.AddScoped<MatriculaPorTurmaRepositorio>();
 builder.Services.AddScoped<MatriculaServico>();
 builder.Services.AddScoped<MatriculaRepositorio>();
 
+builder.Services.AddScoped<NotaAlunoServico>();
+builder.Services.AddScoped<NotaAlunoRepositorio>();
 
 
 
