@@ -7,9 +7,6 @@ public class NotaAlunoCriarAtualizarRequisicao
 {
 
     [Required]
-    public int Id { get; set; }
-
-    [Required]
     [Column(TypeName = "decimal(13,2)")]
     public decimal NotaObtida { get; set; }
 

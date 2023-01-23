@@ -1,6 +1,9 @@
 using MangaI.Data;
 using MangaI.Repositorios;
 using MangaI.Services;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -49,6 +52,8 @@ builder.Services.AddScoped<MatriculaRepositorio>();
 builder.Services.AddScoped<NotaAlunoServico>();
 builder.Services.AddScoped<NotaAlunoRepositorio>();
 
+builder.Services.AddScoped<AutenticacaoServico>();
+
 
 
 //Adicionando a minha classe de contexto na API
@@ -64,6 +69,23 @@ builder.Services.AddDbContext<ContextoBD>(
       ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ConexaoBanco"))
   )
 );
+
+//Configurações para usar Autenticação com JWT
+var JWTChave = Encoding.ASCII.GetBytes(builder.Configuration["JWTChave"]);
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+      options.SaveToken = true;
+      options.TokenValidationParameters = new TokenValidationParameters
+      {
+        IssuerSigningKey = new SymmetricSecurityKey(JWTChave),
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+      };
+    });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -79,6 +101,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
