@@ -1,5 +1,6 @@
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -9,65 +10,70 @@ namespace MangaI.Controllers;
 [Route("telefones")]
 public class TelefoneController : ControllerBase
 {
-   private readonly TelefoneServico _telefoneServico;
+    private readonly TelefoneServico _telefoneServico;
 
-  public TelefoneController([FromServices] TelefoneServico servico)
-  {
-    _telefoneServico = servico;
-  }
+    public TelefoneController([FromServices] TelefoneServico servico)
+    {
+        _telefoneServico = servico;
+    }
 
-  [HttpPost]
-  public ActionResult<TelefoneResposta>
-    PostTelefone([FromBody]TelefoneCriarAtualizarRequisicao novoTelefone)
-  {
-    try
+    [Authorize(Roles = "Administrador,Servidor")]
+    [HttpPost]
+    public ActionResult<TelefoneResposta> PostTelefone([FromBody] TelefoneCriarAtualizarRequisicao novoTelefone)
     {
-      return StatusCode(201, _telefoneServico.CriarTelefone(novoTelefone));
+        try
+        {
+            return StatusCode(201, _telefoneServico.CriarTelefone(novoTelefone));
+        }
+        catch (BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    catch (BadHttpRequestException e)
-    {
-      return BadRequest(e.Message);
-    }
-  }
 
-  [HttpGet]
-  public ActionResult<List<TelefoneResposta>> GetTelefones()
-  {
-    return Ok(_telefoneServico.ListarTelefones());
-  }
+    [Authorize(Roles = "Administrador,Servidor")]
+    [HttpGet]
+    public ActionResult<List<TelefoneResposta>> GetTelefones()
+    {
+        return Ok(_telefoneServico.ListarTelefones());
+    }
 
-  [HttpGet("{id:int}")]
-  public ActionResult<TelefoneResposta> GetTelefone([FromRoute] int id)
-  {
-    try
+    [Authorize]
+    [HttpGet("{id:int}")]
+    public ActionResult<TelefoneResposta> GetTelefone([FromRoute] int id)
     {
-      return Ok(_telefoneServico.BuscarTelefonePeloId(id));
+        try
+        {
+            return Ok(_telefoneServico.BuscarTelefonePeloId(id));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
-    catch (Exception e)
-    {
-      return NotFound(e.Message);
-    }
-  }
-
-  [HttpDelete("{id:int}")]
-  public ActionResult DeleteTelefone([FromRoute] int id)
-  {
-    try
-    {
-      _telefoneServico.RemoverTelefone(id);
-      return NoContent();
-    }
-    catch (BadHttpRequestException e)
-    {
-      return BadRequest(e.Message);
-    }
-    catch (Exception e)
-    {
-      return NotFound(e.Message);
-    }
-  } 
 
 
+    [Authorize(Roles = "Administrador")]
+    [HttpDelete("{id:int}")]
+    public ActionResult DeleteTelefone([FromRoute] int id)
+    {
+        try
+        {
+            _telefoneServico.RemoverTelefone(id);
+            return NoContent();
+        }
+        catch (BadHttpRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPut("{id:int}")]
     public ActionResult<TelefoneResposta> PutTelefone([FromBody] TelefoneCriarAtualizarRequisicao telefoneEditado, [FromRoute] int id)
     {

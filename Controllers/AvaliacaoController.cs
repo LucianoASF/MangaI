@@ -1,5 +1,6 @@
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -18,9 +19,9 @@ public class AvaliacaoController : ControllerBase
     }
 
 
+    [Authorize(Roles = "Administrador,Professor")]
     [HttpPost]
-    public ActionResult<AvaliacaoResposta>
-      PostAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao novaAvaliacao)
+    public ActionResult<AvaliacaoResposta> PostAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao novaAvaliacao)
     {
         try
         {
@@ -35,12 +36,15 @@ public class AvaliacaoController : ControllerBase
     }
 
 
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpGet]
     public ActionResult<List<AvaliacaoResposta>> GetAvaliacoes()
     {
         return Ok(_avaliacaoServico.ListarAvaliacoes());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<AvaliacaoResposta> GetAvaliacao([FromRoute] int id)
     {
@@ -54,6 +58,8 @@ public class AvaliacaoController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor,Aluno")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteAvaliacao([FromRoute] int id)
     {
@@ -72,6 +78,8 @@ public class AvaliacaoController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpPut("{id:int}")]
     public ActionResult<AvaliacaoResposta> PutAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao avaliacaoEditada, [FromRoute] int id)
     {

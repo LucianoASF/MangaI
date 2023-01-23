@@ -19,9 +19,6 @@ builder.Services.AddScoped<EnderecoRepositorio>();
 builder.Services.AddScoped<ConteudoServico>();
 builder.Services.AddScoped<ConteudoRepositorio>();
 
-builder.Services.AddScoped<PerfilServico>();
-builder.Services.AddScoped<PerfilRepositorio>();
-
 builder.Services.AddScoped<CursoServico>();
 builder.Services.AddScoped<CursoRepositorio>();
 
@@ -76,14 +73,14 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-      options.SaveToken = true;
-      options.TokenValidationParameters = new TokenValidationParameters
-      {
-        IssuerSigningKey = new SymmetricSecurityKey(JWTChave),
-        ValidateIssuerSigningKey = true,
-        ValidateIssuer = false,
-        ValidateAudience = false,
-      };
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(JWTChave),
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
     });
 
 builder.Services.AddControllers();

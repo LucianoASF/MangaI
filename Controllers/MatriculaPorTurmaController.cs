@@ -1,5 +1,6 @@
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -13,6 +14,9 @@ public class MatriculaPorTurmaController : ControllerBase
     {
         _servico = m;
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor,Aluno")]
     [HttpPost]
     public ActionResult<MatriculaPorTurmaResposta> PostMatriculaPorTurma([FromBody] MatriculaPorTurmaCriarAtualizarRequisicao novaMatricula)
     {
@@ -20,11 +24,17 @@ public class MatriculaPorTurmaController : ControllerBase
         return CreatedAtAction(nameof(GetMatriculaPorTurma), new { Id = resposta.Id }, resposta);
 
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpGet]
     public ActionResult<List<MatriculaPorTurmaResposta>> GetMatriculasPorTurmas()
     {
         return Ok(_servico.ListarMatriculasPorTurma());
     }
+
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<MatriculaPorTurmaResposta> GetMatriculaPorTurma([FromRoute] int id)
     {
@@ -37,6 +47,9 @@ public class MatriculaPorTurmaController : ControllerBase
             return NotFound(e.Message);
         }
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteMatriculaPorTurma([FromRoute] int id)
     {
@@ -50,6 +63,9 @@ public class MatriculaPorTurmaController : ControllerBase
             return NotFound(e.Message);
         }
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor,Aluno")]
     [HttpPut("{id:int}")]
     public ActionResult<MatriculaPorTurmaResposta> PutMatriculaPorTurma([FromBody] MatriculaPorTurmaCriarAtualizarRequisicao novaMatricula, int id)
     {

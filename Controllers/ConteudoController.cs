@@ -1,6 +1,7 @@
 
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -19,8 +20,7 @@ public class ConteudoController : ControllerBase
     }
 
 
-
-
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpPost]
     public ActionResult<ConteudoResposta> PostConteudo([FromBody] ConteudoCriarAtualizarRequisicao novoConteudo)
     {
@@ -36,12 +36,16 @@ public class ConteudoController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpGet]
     public ActionResult<List<ConteudoResposta>> GetConteudos()
     {
         return Ok(_conteudoServico.ListarConteudos());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<ConteudoResposta> GetConteudo([FromRoute] int id)
     {
@@ -55,6 +59,8 @@ public class ConteudoController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteConteudo([FromRoute] int id)
     {
@@ -73,6 +79,8 @@ public class ConteudoController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpPut("{id:int}")]
     public ActionResult<ConteudoResposta> PutConteudo([FromBody] ConteudoCriarAtualizarRequisicao conteudoEditado, [FromRoute] int id)
     {

@@ -26,7 +26,7 @@ public class UsuarioRepositorio
     public Usuario BuscarUsuarioPeloEmail(string email)
     {
         return _contexto.Usuarios
-          .AsNoTracking()
+          .AsNoTracking().Include(u => u.Perfil)
           .FirstOrDefault(usuario => usuario.Email == email);
     }
 

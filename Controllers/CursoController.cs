@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MangaI.Controllers;
 
@@ -15,6 +16,8 @@ public class CursoController : ControllerBase
         _cursoServico = servico;
     }
 
+
+    [Authorize(Roles = "Administrador")]
     [HttpPost]
     public ActionResult<CursoResposta> PostCurso([FromBody] CursoCriarAtualizarRequisicao novoCurso)
     {
@@ -28,6 +31,8 @@ public class CursoController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpGet]
     public ActionResult<List<CursoResposta>> GetCurso()
     {
@@ -35,6 +40,8 @@ public class CursoController : ControllerBase
         return Ok(_cursoServico.ListarCursos());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<CursoResposta> GetCurso([FromRoute] int id)
     {
@@ -52,6 +59,8 @@ public class CursoController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteCurso([FromRoute] int id)
     {
@@ -70,6 +79,8 @@ public class CursoController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador")]
     [HttpPut("{id:int}")]
     public ActionResult<CursoResposta> PutCurso
       ([FromRoute] int id, [FromBody] CursoCriarAtualizarRequisicao cursoEditado)

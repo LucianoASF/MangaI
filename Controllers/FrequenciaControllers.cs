@@ -1,6 +1,7 @@
 using MangaI.Dtos;
 using MangaI.Excecoes;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -18,6 +19,8 @@ public class FrequenciaController : ControllerBase
         _frequenciaServico = servico;
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpPost]
     public ActionResult<FrequenciaResposta> PostFrequencia(FrequenciaCriarAtualizarRequisicao novaFrequencia)
     {
@@ -33,12 +36,16 @@ public class FrequenciaController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpGet]
     public ActionResult<List<FrequenciaResposta>> GetFrequencias()
     {
         return Ok(_frequenciaServico.ListarFrequencias());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<FrequenciaResposta> GetFrequencia([FromRoute] int id)
     {
@@ -52,6 +59,8 @@ public class FrequenciaController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteFrequencia([FromRoute] int id)
     {
@@ -66,6 +75,8 @@ public class FrequenciaController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpPut("{id:int}")]
     public ActionResult<FrequenciaResposta>
       PutFrequencia([FromRoute] int id, [FromBody] FrequenciaCriarAtualizarRequisicao frequenciaEditada)

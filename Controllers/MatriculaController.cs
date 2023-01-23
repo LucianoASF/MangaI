@@ -1,5 +1,6 @@
 using MangaI.Dtos;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -14,6 +15,9 @@ public class MatriculaController : ControllerBase
     {
         _matricula = servico;
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPost]
     public ActionResult<MatriculaResposta> PostMatricula([FromBody] MatriculaCriarAtualizarRequisicao matricula)
     {
@@ -21,11 +25,17 @@ public class MatriculaController : ControllerBase
         return CreatedAtAction(nameof(GetMatricula), new { Id = resposta.Id }, resposta);
 
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpGet]
     public ActionResult<List<MatriculaResposta>> GetMatriculas()
     {
         return Ok(_matricula.ListarMatriculas());
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor,Aluno")]
     [HttpGet("{id:int}")]
     public ActionResult<MatriculaResposta> GetMatricula([FromRoute] int id)
     {
@@ -38,6 +48,9 @@ public class MatriculaController : ControllerBase
             return NotFound(e.Message);
         }
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteMatricula([FromRoute] int id)
     {
@@ -51,6 +64,9 @@ public class MatriculaController : ControllerBase
             return NotFound(e.Message);
         }
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPut("{id:int}")]
     public ActionResult<MatriculaResposta> PutMatricula([FromRoute] int id, [FromBody] MatriculaCriarAtualizarRequisicao novaMatricula)
     {

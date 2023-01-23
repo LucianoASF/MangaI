@@ -1,6 +1,7 @@
 using MangaI.Dtos;
 using MangaI.Excecoes;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangaI.Controllers;
@@ -17,6 +18,8 @@ public class UsuarioController : ControllerBase
         _usuarioServico = servico;
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPost]
     public ActionResult<UsuarioResposta> PostUsuario(UsuarioCriarRequisicao novoUsuario)
     {
@@ -32,12 +35,15 @@ public class UsuarioController : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Administrador,Servidor,Professor")]
     [HttpGet]
     public ActionResult<List<UsuarioResposta>> GetUsuarios()
     {
         return Ok(_usuarioServico.ListarUsuarios());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<UsuarioResposta> GetUsuario([FromRoute] int id)
     {
@@ -51,6 +57,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteUsuario([FromRoute] int id)
     {
@@ -65,9 +73,10 @@ public class UsuarioController : ControllerBase
         }
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPut("{id:int}")]
-    public ActionResult<UsuarioResposta>
-      PutUsuario([FromRoute] int id, [FromBody] UsuarioCriarRequisicao usuarioEditado)
+    public ActionResult<UsuarioResposta> PutUsuario([FromRoute] int id, [FromBody] UsuarioCriarRequisicao usuarioEditado)
     {
         try
         {

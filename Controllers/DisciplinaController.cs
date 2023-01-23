@@ -1,6 +1,7 @@
 using MangaI.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using MangaI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MangaI.Controllers;
 
@@ -15,6 +16,8 @@ public class DisciplinaController : ControllerBase
         _disciplinaServico = servico;
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPost]
     public ActionResult<DisciplinaResposta> PostDisciplina([FromBody] DisciplinaCriarAtualizarRequisicao novaDisciplina)
     {
@@ -28,6 +31,8 @@ public class DisciplinaController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpGet]
     public ActionResult<List<DisciplinaResposta>> GetDisciplina()
     {
@@ -35,6 +40,8 @@ public class DisciplinaController : ControllerBase
         return Ok(_disciplinaServico.ListarDisciplinas());
     }
 
+
+    [Authorize]
     [HttpGet("{id:int}")]
     public ActionResult<DisciplinaResposta> GetDisciplina([FromRoute] int id)
     {
@@ -52,6 +59,8 @@ public class DisciplinaController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador")]
     [HttpDelete("{id:int}")]
     public ActionResult DeleteDisciplina([FromRoute] int id)
     {
@@ -70,6 +79,8 @@ public class DisciplinaController : ControllerBase
 
     }
 
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPut("{id:int}")]
     public ActionResult<DisciplinaResposta> PutDisciplina
       ([FromRoute] int id, [FromBody] DisciplinaCriarAtualizarRequisicao disciplinaEditado)
@@ -86,6 +97,9 @@ public class DisciplinaController : ControllerBase
 
 
     }
+
+
+    [Authorize(Roles = "Administrador,Servidor")]
     [HttpPut("{disciplinaId:int}/matrizes/{matrizId:int}")]
     public ActionResult<DisciplinaResposta> AtribuirOuDesatribuir([FromRoute] int disciplinaId, [FromRoute] int matrizId)
     {
