@@ -7,4 +7,6 @@ public class EnderecoResposta
     public string Cep { get; set; }
     public string Bairro { get; set; }
     public string Cidade { get; set; }
+    public int UsuarioId { get; set; }
+    public UsuarioResposta Usuario { get; set; }
 }

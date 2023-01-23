@@ -29,4 +29,7 @@ public class Endereco
 
     public Usuario Usuario { get; set; }
 
+    //Chave Estrangeira Usuario 1 : 1 Endereco
+
+    public int UsuarioId { get; set; }
 }

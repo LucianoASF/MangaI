@@ -20,12 +20,13 @@ public class EnderecoRepositorio
     }
     public List<Endereco> ListarEnderecos()
     {
-        return _contextoBD.Enderecos.AsNoTracking().ToList();
+
+        return _contextoBD.Enderecos.AsNoTracking().Include(endereco => endereco.Usuario).ToList();
     }
     public Endereco BuscarEnderecoPeloId(int id, bool tracking = true)
     {
-        return tracking ? _contextoBD.Enderecos.FirstOrDefault(endereco => endereco.Id == id) :
-        _contextoBD.Enderecos.AsNoTracking().FirstOrDefault(endereco => endereco.Id == id);
+        return tracking ? _contextoBD.Enderecos.Include(endereco => endereco.Usuario).FirstOrDefault(endereco => endereco.Id == id) :
+        _contextoBD.Enderecos.AsNoTracking().Include(endereco => endereco.Usuario).FirstOrDefault(endereco => endereco.Id == id);
     }
     public void RemoverEndereco(Endereco endereco)
     {

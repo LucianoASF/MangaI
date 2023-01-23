@@ -1,7 +1,9 @@
 namespace MangaI.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
+[Index(nameof(Email), IsUnique = true)]
 public class Usuario
 {
 
@@ -48,12 +50,9 @@ public class Usuario
 
     public int PerfilId { get; set; }
 
-    //Propriedade de Navegação Usuario N : 1 Endereco
+    //Propriedade de Navegação Usuario 1 : 1 Endereco
     public Endereco Endereco { get; set; }
 
-    //Chave Estrangeira Usuario N : 1 Endereco
-
-    public int EnderecoId { get; set; }
 
     //Propriedade de Navegação Usuario 1 : N Matricula
     public List<Matricula> Matriculas { get; set; }

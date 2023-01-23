@@ -36,39 +36,4 @@ public class UsuarioCriarRequisicao
     [Required(ErrorMessage = "{0} é obrigatório")]
     public int PerfilId { get; set; }
 
-    [Required(ErrorMessage = "{0} é obrigatório")]
-    public int EnderecoId { get; set; }
-
-
-
-    //  public EnderecoCriarAtualizarRequisicao Endereco { get; set; }
-
 }
-
-
-
-/*public class EnderecoCriarAtualizarRequisicao
-{
-    [Required(ErrorMessage = "Esse campo não pode estar vazio!")]
-    public string Rua { get; set; }
-
-
-
-    [Required(ErrorMessage = "Esse campo não pode estar vazio!")]
-    public string Cep { get; set; }
-
-
-
-    [Required(ErrorMessage = "Esse campo não pode estar vazio!")]
-    [StringLength(100, MinimumLength = 3, ErrorMessage = "Tamanho de caracteres inválidos!")]
-    public string Bairro { get; set; }
-
-
-
-    [Required(ErrorMessage = "Esse campo não pode estar vazio!")]
-    [StringLength(100, MinimumLength = 3, ErrorMessage = "Tamanho de caracteres inválidos!")]
-    public string Cidade { get; set; }
-
-}
-
-*/

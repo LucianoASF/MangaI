@@ -3,6 +3,7 @@ using System;
 using MangaI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangaI.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    partial class ContextoBDModelSnapshot : ModelSnapshot
+    [Migration("20230103190257_L3")]
+    partial class L3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,13 +140,7 @@ namespace MangaI.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(45)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
 
                     b.ToTable("Enderecos");
                 });
@@ -338,6 +334,9 @@ namespace MangaI.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(45)");
 
+                    b.Property<int>("EnderecoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(45)");
@@ -359,7 +358,7 @@ namespace MangaI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
+                    b.HasIndex("EnderecoId")
                         .IsUnique();
 
                     b.HasIndex("PerfilId");
@@ -402,17 +401,6 @@ namespace MangaI.Migrations
                         .IsRequired();
 
                     b.Navigation("Turma");
-                });
-
-            modelBuilder.Entity("MangaI.Models.Endereco", b =>
-                {
-                    b.HasOne("MangaI.Models.Usuario", "Usuario")
-                        .WithOne("Endereco")
-                        .HasForeignKey("MangaI.Models.Endereco", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("MangaI.Models.Frequencia", b =>
@@ -526,11 +514,19 @@ namespace MangaI.Migrations
 
             modelBuilder.Entity("MangaI.Models.Usuario", b =>
                 {
+                    b.HasOne("MangaI.Models.Endereco", "Endereco")
+                        .WithOne("Usuario")
+                        .HasForeignKey("MangaI.Models.Usuario", "EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MangaI.Models.Perfil", "Perfil")
                         .WithMany("Usuarios")
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Endereco");
 
                     b.Navigation("Perfil");
                 });
@@ -553,6 +549,11 @@ namespace MangaI.Migrations
             modelBuilder.Entity("MangaI.Models.Disciplina", b =>
                 {
                     b.Navigation("Turmas");
+                });
+
+            modelBuilder.Entity("MangaI.Models.Endereco", b =>
+                {
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("MangaI.Models.Matricula", b =>
@@ -588,8 +589,6 @@ namespace MangaI.Migrations
 
             modelBuilder.Entity("MangaI.Models.Usuario", b =>
                 {
-                    b.Navigation("Endereco");
-
                     b.Navigation("Matriculas");
 
                     b.Navigation("Telefones");

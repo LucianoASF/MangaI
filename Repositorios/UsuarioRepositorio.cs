@@ -33,7 +33,6 @@ public class UsuarioRepositorio
     public List<Usuario> ListarUsuarios()
     {
         return _contexto.Usuarios
-          .Include(usuario => usuario.Endereco)
           .Include(usuario => usuario.Perfil)
           .AsNoTracking().ToList();
     }
@@ -42,13 +41,11 @@ public class UsuarioRepositorio
     {
         return tracking ?
           _contexto.Usuarios
-          .Include(usuario => usuario.Endereco)
           .Include(usuario => usuario.Perfil)
           .FirstOrDefault(u => u.Id == id) :
           _contexto.Usuarios
 
           .AsNoTracking()
-          .Include(usuario => usuario.Endereco)
           .Include(usuario => usuario.Perfil)
           .FirstOrDefault(u => u.Id == id);
     }
