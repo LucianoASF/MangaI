@@ -18,8 +18,6 @@ public class AvaliacaoController : ControllerBase
     }
 
 
-
-
     [HttpPost]
     public ActionResult<AvaliacaoResposta>
       PostAvaliacao([FromBody] AvaliacaoCriarAtualizarRequisicao novaAvaliacao)
@@ -35,6 +33,7 @@ public class AvaliacaoController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
 
     [HttpGet]
     public ActionResult<List<AvaliacaoResposta>> GetAvaliacoes()

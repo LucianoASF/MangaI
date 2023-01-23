@@ -51,14 +51,10 @@ public class AutenticacaoServico
 
         //Nome do usuario
         claims.Add(new Claim(ClaimTypes.Name, usuario.Nome));
-
         //Id do usuario
         claims.Add(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
 
-        foreach (var perfil in usuario.Perfis)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, perfil.Nome));
-        }
+        claims.Add(new Claim(ClaimTypes.Role, usuario.Perfil.Nome));
 
         //Criando o token
         var tokenJWT = new JwtSecurityToken(

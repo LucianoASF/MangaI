@@ -14,21 +14,21 @@ public class AutenticacaoController : ControllerBase
     {
         _autenticacaoServico = servico;
     }
-}
 
-[HttpPost]
-public ActionResult<string> Login([FromBody] UsuarioLoginRequisicao usuarioLogin)
-{
-    try
+
+    [HttpPost]
+    public ActionResult<string> Login([FromBody] UsuarioLoginRequisicao usuarioLogin)
     {
-        //Manda para o servico gerar o token
-        var tokenJWT = _autenticacaoServico.Login(usuarioLogin);
+        try
+        {
+            //Manda para o servico gerar o token
+            var tokenJWT = _autenticacaoServico.Login(usuarioLogin);
 
-        return Ok(tokenJWT);
-    }
-    catch (Exception e)
-    {
-        return NotFound(e.Message);
+            return Ok(tokenJWT);
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }
-
